@@ -273,7 +273,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
   return (
     <div
       className={cx(
-        `Selectbox relative w-full overflow-y-visible hover:cursor-pointer focus:outline-none`,
+        `Selectbox relative w-full overflow-y-visible hover:cursor-pointer focus:outline-none transition`,
         material && 'material',
         open && 'focus',
         className && className

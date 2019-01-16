@@ -88,9 +88,9 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
     }
   }
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (onClick && !disabled && !loading) {
+    if (!disabled && !loading) {
       createRipple(e)
-      onClick()
+      onClick && onClick()
     }
   }
 

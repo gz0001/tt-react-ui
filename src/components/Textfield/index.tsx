@@ -212,7 +212,7 @@ export const Textfield: React.FunctionComponent<TextfieldProps> = React.memo(pro
   return (
     <div
       className={cx(
-        `Textfield relative flex flex-col justify-center`,
+        `Textfield relative flex flex-col justify-center transition`,
         material && 'material',
         populated && 'focus',
         className && className
