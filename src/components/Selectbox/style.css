@@ -14,6 +14,9 @@
     &.populated {
       transform: translateY(var(--selectbox-label-top));
     }
+    .focus & {
+      color: var(--first);
+    }
   }
   &-list {
     background-color: var(--selectbox-list-background);
@@ -22,7 +25,6 @@
     max-height: var(--selectbox-list-height);
     transform: translateY(101%);
   }
-
   &-list-item {
     height: var(--selectbox-list-item-height);
     border: var(--selectbox-border);
@@ -69,7 +71,6 @@
     background-color: var(--selectbox-submit-background);
     height: var(--selectbox-list-item-height);
     transform: translateY(100%);
-
     &Wrapper {
       transform: translateY(101%);
       height: var(--selectbox-list-height);
@@ -108,6 +109,26 @@
     .Selectbox-trigger {
       background-color: var(--selectbox-material-background);
       padding: var(--selectbox-material-padding);
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      background-color: var(--first);
+      transform: translate(-50%, 100%) scaleX(0);
+      width: 101%;
+      height: var(--textfield-material-border-thickness-active);
+      transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1);
+    }
+    &:hover {
+      border-bottom: var(--selectbox-material-border-hover);
+    }
+    &.focus {
+      border-bottom-color: transparent;
+      &::before {
+        transform: translate(-50%, 100%) scaleX(1);
+      }
     }
   }
   &.native.material {

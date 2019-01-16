@@ -113,7 +113,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
     selIndex: -1
   })
 
-  const { open, selIndex, focus } = state
+  const { open, selIndex } = state
 
   const selectContainer = React.useRef(null)
   const listContainer = React.useRef(null)
@@ -131,8 +131,12 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
   }
 
   const handleClickOutSide = (event: MouseEvent) => {
-    // @ts-ignore
-    !(event.target.className.indexOf('Selectbox') > -1) && open && toogleOpen()
+    try {
+      // @ts-ignore
+      !(event.target.className.indexOf('Selectbox') > -1) && open && toogleOpen()
+    } catch (error) {
+      open && toogleOpen()
+    }
   }
 
   const handleSelect = (option: Option) => {
@@ -223,6 +227,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
         className={cx(
           `Selectbox native relative w-full  hover:cursor-pointer `,
           material && 'material',
+          open && 'focus',
           className && className
         )}
         style={style}
@@ -250,6 +255,8 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
           name={name}
           // @ts-ignore
           value={selection}
+          onFocus={toogleOpen}
+          onBlur={toogleOpen}
           onChange={(event: React.ChangeEvent<HTMLSelectElement>) => onSelect(event.target.value)}
         >
           <option />
@@ -268,6 +275,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
       className={cx(
         `Selectbox relative w-full overflow-y-visible hover:cursor-pointer focus:outline-none`,
         material && 'material',
+        open && 'focus',
         className && className
       )}
       id={id}
@@ -302,7 +310,8 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
             <div
               className={cx(
                 'Selectbox-arrow  w-3 h-3 border-black  border-b-2 border-r-2 transition',
-                open ? 'rotate-225' : 'rotate-45'
+                open ? 'rotate-225' : 'rotate-45',
+                material && 'mr-1'
               )}
             />
           )}
