@@ -1,0 +1,40 @@
+.Textfield {
+  background: var(--textfield-background);
+  border: var(--textfield-border);
+  border-radius: var(--textfield-border-radius);
+
+  &-inputWrapper {
+    padding: var(--textfield-padding);
+  }
+  &-label {
+    color: var(--textfield-label-color);
+    padding: var(--textfield-padding);
+    &.populated {
+      top: var(--textfield-label-top);
+    }
+  }
+  &-list {
+    max-height: var(--textfield-list-height);
+    background: var(--textfield-list-background);
+  }
+  &-list-item {
+    height: var(--textfield-list-item-height);
+    &.active,
+    &:hover {
+      background-color: var(--textfield-list-item-active-background);
+    }
+  }
+
+  &.material {
+    background: var(--textfield-material-background);
+    border-bottom: var(--textfield-material-border);
+
+    .Textfield-inputWrapper {
+      padding: var(--textfield-material-padding);
+    }
+
+    .Textfield-label {
+      padding: var(--textfield-material-padding);
+    }
+  }
+}

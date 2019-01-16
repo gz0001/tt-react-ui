@@ -1,0 +1,29 @@
+.Radio {
+  &-button {
+    width: var(--radio-size);
+    height: var(--radio-size);
+    border: var(--radio-border);
+    .small & {
+      width: var(--radio-small-size);
+      height: var(--radio-small-size);
+    }
+  }
+
+  &-dot {
+    width: var(--radio-dot-size);
+    height: var(--radio-dot-size);
+    background-color: var(--radio-color);
+    transform: translate(-50%, -50%) scale(0, 0);
+    .checked & {
+      transform: translate(-50%, -50%) scale(1, 1);
+    }
+  }
+
+  &-label {
+    font-size: var(--checkbox-label-fontSize);
+    margin-left: var(--checkbox-label-marginLeft);
+    .small & {
+      font-size: var(--checkbox-label-small-fontSize);
+    }
+  }
+}

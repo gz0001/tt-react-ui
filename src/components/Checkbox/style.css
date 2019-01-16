@@ -1,0 +1,27 @@
+.Checkbox {
+  &-input {
+    background-color: var(--checkbox-background);
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+    border-radius: var(--border-radius);
+    .small & {
+      width: var(--checkbox-small-size);
+      height: var(--checkbox-small-size);
+    }
+  }
+
+  &-checkmark {
+    width: var(--checkbox-mark-width);
+    height: var(--checkbox-mark-height);
+    border-left: var(--checkbox-mark-border);
+    border-bottom: var(--checkbox-mark-border);
+  }
+
+  &-label {
+    font-size: var(--checkbox-label-fontSize);
+    margin-left: var(--checkbox-label-marginLeft);
+    .small & {
+      font-size: var(--checkbox-label-small-fontSize);
+    }
+  }
+}

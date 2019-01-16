@@ -1,0 +1,121 @@
+.Selectbox {
+  &-trigger {
+    border: var(--selectbox-border);
+    border-radius: var(--selectbox-border-radius);
+    background-color: var(--selectbox-background);
+    padding: var(--selectbox-padding);
+    color: var(--selectbox-color);
+    &.native {
+      padding: 0;
+    }
+  }
+  &-label {
+    color: var(--selectbox-label-color);
+    &.populated {
+      transform: translateY(var(--selectbox-label-top));
+    }
+  }
+  &-list {
+    background-color: var(--selectbox-list-background);
+    border: var(--selectbox-list-border);
+    border-radius: var(--selectbox-list-border-radius);
+    max-height: var(--selectbox-list-height);
+    transform: translateY(101%);
+  }
+
+  &-list-item {
+    height: var(--selectbox-list-item-height);
+    border: var(--selectbox-border);
+    border-radius: var(--selectbox-border-radius);
+    background-color: var(--selectbox-list-item-background);
+    &.selecting {
+      border: var(--selectbox-selecting-border);
+    }
+    &-checkbox {
+      margin-bottom: 2px;
+      width: var(--selectbox-checkbox-size);
+      height: var(--selectbox-checkbox-size);
+      border: var(--selectbox-checkbox-border);
+      border-radius: var(--selectbox-checkbox-border-radius);
+      &::before {
+        content: '';
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        transform: translate(-45%, -55%) rotate(45deg);
+        height: var(--selectbox-checkmark-height);
+        width: var(--selectbox-checkmark-width);
+        border-bottom: var(--selectbox-checkmark-border);
+        border-right: var(--selectbox-checkmark-border);
+        opacity: 0;
+        transition: 0.5s;
+      }
+    }
+    &.active,
+    &:hover {
+      background-color: var(--selectbox-background-active);
+      color: var(--selectbox-color-active);
+      .Selectbox-list-item-checkbox {
+        border: var(--selectbox-checkbox-border-active);
+      }
+    }
+    &.active {
+      .Selectbox-list-item-checkbox::before {
+        opacity: 1;
+      }
+    }
+  }
+  &-list-submit {
+    background-color: var(--selectbox-submit-background);
+    height: var(--selectbox-list-item-height);
+    transform: translateY(100%);
+
+    &Wrapper {
+      transform: translateY(101%);
+      height: var(--selectbox-list-height);
+    }
+  }
+  &-select {
+    appearance: none;
+    border: var(--selectbox-border);
+    border-radius: var(--selectbox-border-radius);
+    background-color: var(--selectbox-background);
+    padding: var(--selectbox-padding);
+    padding-top: 1.25rem;
+    color: var(--selectbox-color);
+    .material & {
+      background-color: var(--selectbox-material-background);
+      padding: var(--selectbox-native-material-padding);
+    }
+  }
+  &.native {
+    .Selectbox-label {
+      top: 50%;
+      left: var(--selectbox-padding);
+      transform: translate(0, -50%);
+      &.populated {
+        transform: translateY(var(--selectbox-native-label-top));
+      }
+    }
+    .Selectbox-arrow {
+      top: 40%;
+      right: var(--selectbox-padding, 0.75rem);
+      transform: rotate(45deg) translateX(-50%);
+    }
+  }
+  &.material {
+    border-bottom: var(--selectbox-material-border);
+    .Selectbox-trigger {
+      background-color: var(--selectbox-material-background);
+      padding: var(--selectbox-material-padding);
+    }
+  }
+  &.native.material {
+    .Selectbox-label {
+      left: 0;
+    }
+    .Selectbox-arrow {
+      right: 0;
+    }
+  }
+}

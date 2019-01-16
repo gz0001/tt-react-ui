@@ -1,0 +1,7 @@
+@tailwind preflight;
+@tailwind components;
+@tailwind utilities;
+@import './components/Checkbox/style.css';
+@import './components/Radio/style.css';
+@import './components/Selectbox/style.css';
+@import './components/Textfield/style.css';
