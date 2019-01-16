@@ -2,6 +2,8 @@
 import * as React from 'react'
 import cx from 'classnames'
 import { Box } from '../Box'
+import { TailWindCSS } from './../../types/TailWindProps'
+
 // ================================================================================================
 
 const convertNum = (num: string): string => {

@@ -1,6 +1,7 @@
 import * as React from 'react'
 import cx from 'classnames'
 import { getClassNames } from '../../utils/getClassNames'
+import { TailWindCSS } from './../../types/TailWindProps'
 
 // ================================================================================================
 

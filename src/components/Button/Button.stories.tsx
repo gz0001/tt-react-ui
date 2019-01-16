@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { text, boolean, select } from '@storybook/addon-knobs/react'
 import { Button } from './'
 ;(storiesOf('Components/Button', module) as any).addWithJSX('Basic button', () => {
-  const types = {
+  const bg = {
     first: 'first',
     second: 'second',
     third: 'third',
@@ -15,6 +15,7 @@ import { Button } from './'
   return (
     <div style={{ padding: '20px 40px' }}>
       <Button
+        bg={select('background', bg, 'first')}
         btnProps={{ onMouseUp: () => console.log('mouse up') }}
         disabled={boolean('disabled', false)}
         inline={boolean('inline', false)}
@@ -24,7 +25,6 @@ import { Button } from './'
         p={text('padding', '4')}
         onClick={() => console.log('button clicked')}
         outLine={boolean('outline', false)}
-        type={select('type', types, 'first')}
         w={text('width', '32')}
       >
         {text('children', 'Im a button.')}

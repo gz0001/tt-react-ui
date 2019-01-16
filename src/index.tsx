@@ -13,5 +13,6 @@ export { Selectbox, SelectboxProps, Option, Selection } from './components/Selec
 export { Text, TextProps } from './components/Text/'
 export { Textfield, TextfieldProps } from './components/Textfield/'
 export { Triangle, TriangleProps } from './components/Triangle/'
+export { TailWindCSS } from './types/TailWindProps'
 export { getClassNames } from './utils/getClassNames'
 export { createState } from './utils/createState'

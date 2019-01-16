@@ -3,6 +3,7 @@ import * as React from 'react'
 import cx from 'classnames'
 import VideoCover from 'react-video-cover'
 import { getClassNames } from '../../utils/getClassNames'
+import { TailWindCSS } from './../../types/TailWindProps'
 
 // ================================================================================================
 

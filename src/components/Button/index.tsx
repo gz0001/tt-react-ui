@@ -2,11 +2,13 @@
 import * as React from 'react'
 import cx from 'classnames'
 import { getClassNames } from '../../utils/getClassNames'
+import { TailWindCSS } from './../../types/TailWindProps'
 
 // ================================================================================================
 
 export interface ButtonProps extends TailWindCSS {
   /** pass any normal button props here */
+  bg?: 'first' | 'second' | 'third' | 'fourth' | 'success' | 'error' | 'grey'
   btnProps?: React.HTMLProps<HTMLButtonElement>
   children?: any
   className?: string
@@ -18,11 +20,12 @@ export interface ButtonProps extends TailWindCSS {
   outLine?: boolean
   onClick?: () => void
   style?: React.CSSProperties
-  type?: 'first' | 'second' | 'third' | 'fourth' | 'success' | 'error' | 'grey'
+  type?: string
 }
 
 export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => {
   const {
+    bg,
     btnProps,
     children,
     className,
@@ -32,7 +35,8 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
     onClick,
     outLine,
     style,
-    type
+    type,
+    ...styleProps
   } = props
 
   // Hook:
@@ -46,16 +50,16 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
 
   switch (true) {
     case outLine:
-      background = `bg-transparent hover:bg-${type}`
-      text = `text-${type} hover:text-white`
-      border = `border-2 border-${type}`
+      background = `bg-transparent hover:bg-${bg}`
+      text = `text-${bg} hover:text-white`
+      border = `border-2 border-${bg}`
       break
     case inline:
       background = 'bg-transparent'
-      text = `text-${type} hover:underline`
+      text = `text-${bg} hover:underline`
       break
     default:
-      background = `bg-${type} hover:bg-${type}-dark`
+      background = `bg-${bg} hover:bg-${bg}-dark`
       text = 'text-white'
   }
 
@@ -94,14 +98,15 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
     <button
       className={cx(
         'Button focus:outline-none transition overflow-hidden relative',
-        getClassNames(props),
         loading && 'spinner',
         styleOptions,
+        getClassNames(styleProps),
         className && className
       )}
       onClick={handleClick}
       ref={btnRef}
       style={style && style}
+      type={type}
       {...btnProps}
     >
       {!loading && children}
@@ -110,6 +115,6 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
 })
 
 Button.defaultProps = {
-  p: '2',
-  type: 'first'
+  bg: 'first',
+  type: 'button'
 }
