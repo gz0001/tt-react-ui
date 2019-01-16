@@ -35,6 +35,10 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
     type
   } = props
 
+  // Hook:
+  const btnRef = React.useRef(null)
+
+  // Styles:
   const display = inline ? 'inline-block' : 'block'
   let border = 'border-0'
   let background = 'bg-transparent'
@@ -63,8 +67,25 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
 
   const styleOptions = [background, border, display, text]
 
-  const handleClick = () => {
+  const createRipple = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const btn = btnRef.current
+    if (btn) {
+      if (btn.getElementsByClassName('Button-ripple').length > 0) {
+        btn.getElementsByClassName('Button-ripple')[0].remove()
+      }
+      const circle = document.createElement('div')
+      btn.appendChild(circle)
+      const rect = btn.getBoundingClientRect()
+      const d = Math.max(btn.clientHeight, btn.clientWidth)
+      circle.style.width = circle.style.height = d + 'px'
+      circle.style.left = e.clientX - rect.left - d / 2 + 'px'
+      circle.style.top = e.clientY - rect.top - d / 2 + 'px'
+      circle.classList.add('Button-ripple')
+    }
+  }
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (onClick && !disabled && !loading) {
+      createRipple(e)
       onClick()
     }
   }
@@ -72,13 +93,14 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
   return (
     <button
       className={cx(
-        'Button focus:outline-none transition',
+        'Button focus:outline-none transition overflow-hidden relative',
         getClassNames(props),
         loading && 'spinner',
         styleOptions,
         className && className
       )}
-      onClick={onClick && handleClick}
+      onClick={handleClick}
+      ref={btnRef}
       style={style && style}
       {...btnProps}
     >
