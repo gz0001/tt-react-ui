@@ -2,7 +2,6 @@
   background: var(--textfield-background);
   border: var(--textfield-border);
   border-radius: var(--textfield-border-radius);
-
   &-inputWrapper {
     padding: var(--textfield-padding);
   }
@@ -11,6 +10,9 @@
     padding: var(--textfield-padding);
     &.populated {
       top: var(--textfield-label-top);
+    }
+    .focus & {
+      color: var(--textfield-label-color-active);
     }
   }
   &-list {
@@ -24,15 +26,32 @@
       background-color: var(--textfield-list-item-active-background);
     }
   }
-
   &.material {
     background: var(--textfield-material-background);
     border-bottom: var(--textfield-material-border);
-
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      background-color: var(--first);
+      transform: translate(-50%, 100%) scaleX(0);
+      width: 101%;
+      height: var(--textfield-material-border-thickness-active);
+      transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1);
+    }
+    &:hover {
+      border-bottom: var(--textfield-material-border-hover);
+    }
+    &.focus {
+      border-bottom-color: transparent;
+      &::before {
+        transform: translate(-50%, 100%) scaleX(1);
+      }
+    }
     .Textfield-inputWrapper {
       padding: var(--textfield-material-padding);
     }
-
     .Textfield-label {
       padding: var(--textfield-material-padding);
     }
