@@ -60,11 +60,12 @@ export interface ColProps extends TailWindCSS {
 }
 
 export const Col: React.FunctionComponent<ColProps> = React.memo(props => {
-  const { children, className, cols, offset, style, ...styleProps } = props
+  const { children, className, cols, offset,px, style, ...styleProps } = props
   return (
     <Box
-      className={cx('Col px-2 max-w-full', className && className)}
+      className={cx('Col max-w-full', className && className)}
       style={style}
+      px={px}
       w={getWidth(cols)}
       ml={getWidth(offset)}
       {...styleProps}
@@ -75,5 +76,6 @@ export const Col: React.FunctionComponent<ColProps> = React.memo(props => {
 })
 
 Col.defaultProps = {
-  cols: '12'
+  cols: '12',
+  px: "2"
 }

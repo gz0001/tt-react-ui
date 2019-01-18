@@ -8,7 +8,7 @@ import { TailWindCSS } from './../../types/TailWindProps'
 
 export interface ButtonProps extends TailWindCSS {
   /** pass any normal button props here */
-  bg?: 'first' | 'second' | 'third' | 'fourth' | 'success' | 'error' | 'grey'
+  bg?: string | string[]
   btnProps?: React.HTMLProps<HTMLButtonElement>
   children?: any
   className?: string

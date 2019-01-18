@@ -86,6 +86,7 @@ export interface TextfieldProps {
   autocompleteFrom?: number
   center?: boolean
   className?: string
+  classNameInput?: string
   iconEnd?: React.ReactNode
   iconStart?: React.ReactNode
   id?: string
@@ -105,6 +106,7 @@ export const Textfield: React.FunctionComponent<TextfieldProps> = React.memo(pro
     autocomplete,
     autocompleteFrom,
     className,
+    classNameInput,
     id,
     iconStart,
     iconEnd,
@@ -233,13 +235,16 @@ export const Textfield: React.FunctionComponent<TextfieldProps> = React.memo(pro
       <div className={cx(`Textfield-inputWrapper flex w-full h-auto`)}>
         {iconStart && <div className="Textfield-icon-start mr-2">{iconStart}</div>}
         <input
-          className={cx(`Textfield-input w-full h-full relative focus:outline-none bg-transparent`)}
+          className={cx(
+            `Textfield-input w-full relative focus:outline-none`,
+            classNameInput && classNameInput
+          )}
           id={id}
           onBlur={handleBlur}
           onFocus={handleFocus}
           onChange={handleInput}
           onKeyDown={handleKeyDown}
-          placeholder={populated && value.length === 0 ? placeholder : ''}
+          placeholder={!label ? placeholder : populated && value.length === 0 ? placeholder : ''}
           type={type}
           value={value}
           {...inputProps}
@@ -255,10 +260,7 @@ export const Textfield: React.FunctionComponent<TextfieldProps> = React.memo(pro
             ref={listContainer}
           >
             {list.map((value: string, i: number) => {
-              const ListItem: any =
-                i < 6
-                  ? (props: any) => <AnimatedListItem {...props}>{props.children}</AnimatedListItem>
-                  : 'button'
+              const ListItem = i < 6 ? AnimatedListItem : 'button'
               return (
                 <ListItem
                   key={value}
@@ -281,6 +283,7 @@ export const Textfield: React.FunctionComponent<TextfieldProps> = React.memo(pro
 
 Textfield.defaultProps = {
   autocompleteFrom: 3,
+  classNameInput: 'bg-transparent',
   type: 'text',
   placeholder: ''
 }

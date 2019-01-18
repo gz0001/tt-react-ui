@@ -36,9 +36,9 @@
       left: 50%;
       background-color: var(--first);
       transform: translate(-50%, 100%) scaleX(0);
-      width: 101%;
+      width: 100%;
       height: var(--textfield-material-border-thickness-active);
-      transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1);
+      transition: transform 0.3s cubic-bezier(0, 0, 0.2, 1);
     }
     &:hover {
       border-bottom: var(--textfield-material-border-hover);
