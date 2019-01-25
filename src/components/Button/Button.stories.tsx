@@ -23,7 +23,7 @@ import { Button } from './'
         rounded={text('borderRadius', 'sm')}
         m={text('margin', '2')}
         p={text('padding', '4')}
-        onClick={() => console.log('button clicked')}
+        onClick={(e) => console.log('button clicked', e)}
         outLine={boolean('outline', false)}
         w={text('width', '32')}
       >

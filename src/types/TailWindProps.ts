@@ -24,6 +24,8 @@ export interface TailWindCSS {
     | 'none'
     | 'flex'
     | 'inline-flex'
+    | 'grid'
+    | 'inline-grid'
     | string[]
   position?: 'static' | 'fixed' | 'absolute' | 'relative' | 'sticky' | string[]
   visibility?: 'visible' | 'invisible' | string[]

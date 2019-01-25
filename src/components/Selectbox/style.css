@@ -18,6 +18,11 @@
       color: var(--first);
     }
   }
+
+  &-value {
+    padding-top: var(--selectbox-value-pt);
+    color: var(--selectbox-value-color)
+  }
   &-list {
     background-color: var(--selectbox-list-background);
     border: var(--selectbox-list-border);
@@ -30,6 +35,7 @@
     border: var(--selectbox-border);
     border-radius: var(--selectbox-border-radius);
     background-color: var(--selectbox-list-item-background);
+    padding: var(--selectbox-list-item-padding);
     &.selecting {
       border: var(--selectbox-selecting-border);
     }

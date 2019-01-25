@@ -13,9 +13,10 @@ export interface TextProps extends TailWindCSS {
   /**
    * color of headline
    */
-  color?: 'grey' | 'first' | 'second' | 'third' | 'fourth' | 'error' | 'success' | 'text' | 'white'
+  color?: string
   className?: string
   paragraph?: boolean
+  size?: string
   textProps?: React.HTMLProps<HTMLParagraphElement | HTMLSpanElement>
   uppercase?: boolean
   /**
@@ -34,6 +35,7 @@ export const Text: React.FunctionComponent<TextProps> = React.memo(props => {
     className,
     paragraph,
     uppercase,
+    size,
     style,
     textProps,
     ...styleProps
@@ -45,10 +47,11 @@ export const Text: React.FunctionComponent<TextProps> = React.memo(props => {
     // @ts-ignore
     <Tag
       className={cx(
-        'Headline',
+        'Text',
         bold && 'font-bold',
         color && `text-${color}`,
         center && 'text-center',
+        size && `text-${size}`,
         uppercase && 'uppercase',
         getClassNames(styleProps),
         className && className

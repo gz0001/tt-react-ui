@@ -56,6 +56,7 @@ export interface ColProps extends TailWindCSS {
   cols?: string
   className?: string
   offset?: string
+  px?: string
   style?: React.CSSProperties
 }
 

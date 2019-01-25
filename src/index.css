@@ -6,3 +6,11 @@
 @import './components/Radio/style.css';
 @import './components/Selectbox/style.css';
 @import './components/Textfield/style.css';
+
+.grid {
+  display: grid;
+}
+
+.inline-grid {
+  display: inline-grid;
+}

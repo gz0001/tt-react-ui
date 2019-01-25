@@ -23,6 +23,7 @@ import { text, boolean, select } from '@storybook/addon-knobs/react'
         className={text('className', '')}
         color={select('color', colors, 'text')}
         paragraph={boolean('paragraph', false)}
+        size={text('size','base')}
         uppercase={boolean('uppercase', false)}
       >
         {text('children', 'i am a Text')}

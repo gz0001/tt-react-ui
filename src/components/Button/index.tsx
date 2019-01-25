@@ -18,7 +18,9 @@ export interface ButtonProps extends TailWindCSS {
   inline?: boolean
   loading?: boolean
   outLine?: boolean
-  onClick?: () => void
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void
+  /** ripple effect on click */
+  ripple?: boolean
   style?: React.CSSProperties
   type?: string
 }
@@ -29,11 +31,13 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
     btnProps,
     children,
     className,
+    color = 'white',
     disabled,
     inline,
     loading,
     onClick,
     outLine,
+    ripple,
     style,
     type,
     ...styleProps
@@ -60,7 +64,7 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
       break
     default:
       background = `bg-${bg} hover:bg-${bg}-dark`
-      text = 'text-white'
+      text = `text-${color}`
   }
 
   if (disabled) {
@@ -89,15 +93,15 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
   }
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!disabled && !loading) {
-      createRipple(e)
-      onClick && onClick()
+      ripple && createRipple(e)
+      onClick && onClick(e)
     }
   }
 
   return (
     <button
       className={cx(
-        'Button focus:outline-none transition overflow-hidden relative',
+        'Button focus:outline-none transition',
         loading && 'spinner',
         styleOptions,
         getClassNames(styleProps),
@@ -115,6 +119,9 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
 })
 
 Button.defaultProps = {
-  bg: 'first',
-  type: 'button'
+  bg: "first",
+  ripple: true,
+  position: "relative",
+  overflow: "hidden ",
+  type: "button"
 }

@@ -1,6 +1,6 @@
 {
   "name": "tt-react-ui-2",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "React NPM library containing common components",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -65,6 +65,7 @@
     "react-pose": "^4.0.4",
     "react-test-renderer": "^16.7.0-alpha.0",
     "react-video-cover": "^1.2.0",
+    "storybook-addon-react-live-edit": "^2.0.2",
     "tailwindcss": "^0.7.2",
     "tailwindcss-layout": "^1.0.2",
     "tailwindcss-spinner": "^0.2.0",

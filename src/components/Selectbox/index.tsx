@@ -300,7 +300,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
         >
           {label}
         </label>
-        <div className={cx(`Selectbox-value relative pt-2 w-full text-left truncate`)}>
+        <div className={cx(`Selectbox-value relative w-full text-left truncate`)}>
           <span className={cx(`Selectbox-content text-base`)}>{value ? value : '\xa0'}</span>
         </div>
         <div className="Selectbox-icon ml-auto transition">
@@ -342,7 +342,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
                   <ListItem
                     aria-selected={isActive}
                     className={cx(
-                      `Selectbox-list-item flex items-center w-full px-4 focus:outline-none`,
+                      `Selectbox-list-item flex items-center w-full focus:outline-none`,
                       isActive && 'active',
                       index === selIndex && 'selecting'
                     )}

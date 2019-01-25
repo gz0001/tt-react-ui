@@ -18,6 +18,9 @@
   --selectbox-label-color: var(--grey-dark);
   --selectbox-label-top: -100%;
   --selectbox-native-label-top: -150%;
+  /** Value */
+  --selectbox-value-pt: 0.5rem;
+  --selectbox-value-color: var(--text);
   /** List: */
   --selectbox-list-border: var(--border);
   --selectbox-list-border-radius: var(--border-radius);
@@ -28,6 +31,7 @@
   --selectbox-list-item-background: transparent;
   --selectbox-list-item-active-background: var(--grey-dark);
   --selectbox-selecting-border: 2px solid #000;
+  --selectbox-list-item-padding: 0 0.5rem;
   /* Checkbox **/
   --selectbox-checkbox-size: 1rem;
   --selectbox-checkbox-border: 1px solid #000;

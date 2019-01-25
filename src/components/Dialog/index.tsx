@@ -38,11 +38,11 @@ const DialogContainer = posed.div({
 const DialogWrapper = posed.div({
   preEnter: {
     opacity: 0,
-    y: '-60%'
+    y: '-20px'
   },
   enter: {
     opacity: 1,
-    y: '-5%',
+    y: '0',
     delay: 250,
     transition: {
       duration: 350
@@ -50,7 +50,7 @@ const DialogWrapper = posed.div({
   },
   exit: {
     opacity: 0,
-    y: '-60%',
+    y: '-20px',
     transition: {
       ease: 'easeIn'
     }
@@ -87,7 +87,7 @@ export const Dialog: React.FunctionComponent<DialogProps> = React.memo(
             />
             <DialogWrapper
               className={cx(
-                'Dialog-content bg-white min-w-6 p-4 focus:outline-none overflow-y-auto',
+                'Dialog-content fixed bg-white min-w-6 p-4 focus:outline-none overflow-y-auto',
                 className && className
               )}
               onKeyDown={(e: KeyboardEvent) => e.keyCode === 27 && onClose()}
