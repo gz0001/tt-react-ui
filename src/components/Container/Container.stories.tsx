@@ -23,16 +23,16 @@ import { text, boolean } from '@storybook/addon-knobs/react'
     return (
       <Container fluid={boolean('fluid', true)}>
         <Row>
-          <Col cols={text('1.col', '12, md:6, lg:3')}>
+          <Col width={text('1.col', '12, md:6, lg:3')}>
             <Box h="16" bg="first" my="4" />
           </Col>
-          <Col cols={text('2.col', '12, md:6, lg:3')}>
+          <Col width={text('2.col', '12, md:6, lg:3')}>
             <Box h="16" bg="first" my="4" />
           </Col>
-          <Col cols={text('3.col', '12, md:6, lg:3')}>
+          <Col width={text('3.col', '12, md:6, lg:3')}>
             <Box h="16" bg="first" my="4" />
           </Col>
-          <Col cols={text('4.col', '12, md:6, lg:3')}>
+          <Col width={text('4.col', '12, md:6, lg:3')}>
             <Box h="16" bg="first" my="4" />
           </Col>
         </Row>

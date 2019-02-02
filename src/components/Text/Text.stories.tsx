@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { Text } from './'
 import { text, boolean, select } from '@storybook/addon-knobs/react'
 
-(storiesOf('Components/Text', module) as any).addWithJSX('Basic text', () => {
+;(storiesOf('Components/Text', module) as any).addWithJSX('Basic text', () => {
   const colors = {
     first: 'first',
     second: 'second',
@@ -23,8 +23,11 @@ import { text, boolean, select } from '@storybook/addon-knobs/react'
         className={text('className', '')}
         color={select('color', colors, 'text')}
         paragraph={boolean('paragraph', false)}
-        size={text('size','base')}
+        size={text('size', 'base')}
+        hover={text('hover', 'red')}
+        text={text('text', '')}
         uppercase={boolean('uppercase', false)}
+        /* textProps={{dangerouslySetInnerHTML:{__html: "<span>ascsasc</span>"}}} */
       >
         {text('children', 'i am a Text')}
       </Text>

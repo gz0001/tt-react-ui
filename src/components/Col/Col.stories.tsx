@@ -9,7 +9,7 @@ import { text } from '@storybook/addon-knobs/react'
     <div style={{ padding: '20px 40px' }}>
       <Col
         className={text('className', 'border-2')}
-        cols={text('cols', '6')}
+        width={text('cols', '6')}
         offset={text('offset', '6')}
       >
         {text('chidren', 'i am a column')}

@@ -42,7 +42,7 @@ export const Box: React.FunctionComponent<BoxProps> = React.memo(props => {
     )
   return (
     <Tag
-      className={cx(getClassNames(props), className && className)}
+      className={cx(className && className, getClassNames(props) )}
       style={{ ...style, backgroundImage }}
       {...divProps}
     >

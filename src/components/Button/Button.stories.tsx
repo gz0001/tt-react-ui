@@ -17,8 +17,9 @@ import { Button } from './'
       <Button
         bg={select('background', bg, 'first')}
         btnProps={{ onMouseUp: () => console.log('mouse up') }}
+        color={text('color', 'white')}
+
         disabled={boolean('disabled', false)}
-        inline={boolean('inline', false)}
         loading={boolean('loading', false)}
         rounded={text('borderRadius', 'sm')}
         m={text('margin', '2')}
@@ -26,6 +27,7 @@ import { Button } from './'
         onClick={(e) => console.log('button clicked', e)}
         outLine={boolean('outline', false)}
         w={text('width', '32')}
+        h={text('height', '12')}
       >
         {text('children', 'Im a button.')}
       </Button>

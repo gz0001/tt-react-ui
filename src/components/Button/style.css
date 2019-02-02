@@ -1,4 +1,19 @@
 .Button {
+  &.outline {
+    border-width: var(--btn-outline-borderWidth);
+  }
+
+  &.disabled {
+    background-color: var(--btn-disabled-bg-color);
+    color: var(--btn-disabled-color)
+  }
+
+  &.outline.disabled {
+    border-color: var(--btn-disOutline-bg-color);
+    color: var(--btn-disOutline-color);
+    background-color: transparent;
+  }
+
   &-ripple {
     border-radius: 45%;
     background-color: var(--btn-ripple-color);

@@ -16,22 +16,16 @@ export interface ContainerProps extends TailWindCSS {
 }
 
 export const Container: React.FunctionComponent<ContainerProps> = React.memo(props => {
-  const { children, className, fluid, mx, px, style, w, ...styleProps } = props
+  const { children, className, fluid, ...styleProps } = props
   return (
-    <Box
-      className={cx('Container', !fluid && 'container', className && className)}
-      mx={mx}
-      px={px}
-      style={style}
-      w={w}
-      {...styleProps}
-    >
+    <Box className={cx('Container', !fluid && 'container', className && className)} {...styleProps}>
       {children}
     </Box>
   )
 })
 
 Container.defaultProps = {
+  display: 'block',
   mx: 'auto',
   px: '4',
   w: 'full'

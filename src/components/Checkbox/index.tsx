@@ -40,9 +40,9 @@ export const Checkbox: React.FunctionComponent<CheckboxProps> = React.memo(
       <div
         aria-checked={checked || false}
         className={cx(
+          className && className,
           'Checkbox flex justify-start items-end focus:outline-none',
-          small && 'small',
-          className && className
+          small && 'small'
         )}
         style={style}
         role="checkbox"
@@ -61,7 +61,7 @@ export const Checkbox: React.FunctionComponent<CheckboxProps> = React.memo(
           <div
             className={cx(
               'Checkbox-checkmark -rotate-45 transition',
-              checked ? 'opacity-100 ' : 'opacity-0'
+              checked ? 'opacity-100' : 'opacity-0'
             )}
           />
           <input

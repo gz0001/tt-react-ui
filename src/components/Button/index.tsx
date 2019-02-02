@@ -8,14 +8,13 @@ import { TailWindCSS } from './../../types/TailWindProps'
 
 export interface ButtonProps extends TailWindCSS {
   /** pass any normal button props here */
-  bg?: string | string[]
+  bg?: string 
   btnProps?: React.HTMLProps<HTMLButtonElement>
   children?: any
   className?: string
   closeThickness?: string
   color?: string
   disabled?: boolean
-  inline?: boolean
   loading?: boolean
   outLine?: boolean
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void
@@ -31,9 +30,8 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
     btnProps,
     children,
     className,
-    color = 'white',
+    color,
     disabled,
-    inline,
     loading,
     onClick,
     outLine,
@@ -47,48 +45,41 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
   const btnRef = React.useRef(null)
 
   // Styles:
-  const display = inline ? 'inline-block' : 'block'
-  let border = 'border-0'
+  let border = 'border-transparent'
   let background = 'bg-transparent'
-  let text = 'text-text'
+  let text = `text-${color}`
 
   switch (true) {
     case outLine:
-      background = `bg-transparent hover:bg-${bg}`
-      text = `text-${bg} hover:text-white`
-      border = `border-2 border-${bg}`
-      break
-    case inline:
-      background = 'bg-transparent'
-      text = `text-${bg} hover:underline`
+      background = cx(`bg-transparent `, !disabled && `hover:bg-${bg}`)
+      text = cx(`text-${bg}`, !disabled && `hover:text-${color}`)
+      border = `border-${bg}`
       break
     default:
-      background = `bg-${bg} hover:bg-${bg}-dark`
+      background = cx(`bg-${bg} `, !disabled && `hover:bg-${bg}-dark`)
       text = `text-${color}`
   }
 
-  if (disabled) {
-    text = 'text-white'
-    background = 'bg-grey cursor-not-allowed'
-    border = 'border-0'
-  }
-
-  const styleOptions = [background, border, display, text]
+  const styleOptions = [background, border, text]
 
   const createRipple = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const btn = btnRef.current
-    if (btn) {
-      if (btn.getElementsByClassName('Button-ripple').length > 0) {
-        btn.getElementsByClassName('Button-ripple')[0].remove()
+    try {
+      const btn = btnRef.current
+      if (btn) {
+        if (btn.getElementsByClassName('Button-ripple').length > 0) {
+          btn.getElementsByClassName('Button-ripple')[0].remove()
+        }
+        const circle = document.createElement('div')
+        btn.appendChild(circle)
+        const rect = btn.getBoundingClientRect()
+        const d = Math.max(btn.clientHeight, btn.clientWidth)
+        circle.style.width = circle.style.height = d + 'px'
+        circle.style.left = e.clientX - rect.left - d / 2 + 'px'
+        circle.style.top = e.clientY - rect.top - d / 2 + 'px'
+        circle.classList.add('Button-ripple')
       }
-      const circle = document.createElement('div')
-      btn.appendChild(circle)
-      const rect = btn.getBoundingClientRect()
-      const d = Math.max(btn.clientHeight, btn.clientWidth)
-      circle.style.width = circle.style.height = d + 'px'
-      circle.style.left = e.clientX - rect.left - d / 2 + 'px'
-      circle.style.top = e.clientY - rect.top - d / 2 + 'px'
-      circle.classList.add('Button-ripple')
+    } catch (error) {
+      console.log('ripple effect not working.')
     }
   }
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -101,11 +92,13 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
   return (
     <button
       className={cx(
+        className && className,
         'Button focus:outline-none transition',
         loading && 'spinner',
+        outLine && 'outline',
+        disabled && 'cursor-not-allowed disabled',
         styleOptions,
-        getClassNames(styleProps),
-        className && className
+        getClassNames(styleProps)
       )}
       onClick={handleClick}
       ref={btnRef}
@@ -119,9 +112,10 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
 })
 
 Button.defaultProps = {
-  bg: "first",
-  ripple: true,
-  position: "relative",
-  overflow: "hidden ",
-  type: "button"
+  bg: 'first',
+  color: 'white',
+  position: 'relative',
+  overflow: 'hidden ',
+  ripple: false,
+  type: 'button'
 }

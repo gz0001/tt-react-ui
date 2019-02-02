@@ -35,6 +35,7 @@ export interface SelectboxProps {
   options: Option[]
   selection?: Selection
   style?: React.CSSProperties
+  text?: string
 }
 
 // ================================================================================================
@@ -92,7 +93,8 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
     onSelect,
     options,
     selection,
-    style
+    style,
+    text = 'base'
   } = props
 
   let value: string = null
@@ -301,7 +303,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
           {label}
         </label>
         <div className={cx(`Selectbox-value relative w-full text-left truncate`)}>
-          <span className={cx(`Selectbox-content text-base`)}>{value ? value : '\xa0'}</span>
+          <span className={cx(`Selectbox-content text-${text}`)}>{value ? value : '\xa0'}</span>
         </div>
         <div className="Selectbox-icon ml-auto transition">
           {arrow ? (
@@ -309,7 +311,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
           ) : (
             <div
               className={cx(
-                'Selectbox-arrow  w-3 h-3 border-black  border-b-2 border-r-2 transition',
+                'Selectbox-arrow w-3 h-3 border-black  border-b-2 border-r-2 transition',
                 open ? 'rotate-225' : 'rotate-45',
                 material && 'mr-1'
               )}

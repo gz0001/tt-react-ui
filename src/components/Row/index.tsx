@@ -18,7 +18,7 @@ export const Row: React.FunctionComponent<RowProps> = React.memo(props => {
   const { children, className, style, ...styleProps } = props
   return (
     <Box
-      className={cx('Row flex flex-wrap max-w-full', className && className)}
+      className={cx('Row flex flex-wrap ', className && className)}
       style={style}
       {...styleProps}
     >
@@ -26,3 +26,8 @@ export const Row: React.FunctionComponent<RowProps> = React.memo(props => {
     </Box>
   )
 })
+
+Row.defaultProps = {
+  w: 'auto',
+  nmx: '4'
+}

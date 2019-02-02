@@ -1,6 +1,6 @@
 {
   "name": "tt-react-ui-2",
-  "version": "0.0.13",
+  "version": "0.0.15",
   "description": "React NPM library containing common components",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -30,8 +30,8 @@
     "@storybook/react": "^4.0.11",
     "@types/enzyme": "^3.1.15",
     "@types/enzyme-adapter-react-16": "^1.0.3",
-    "@types/jest": "^23.3.10",
-    "@types/react": "^16.7.13",
+    "@types/jest": "^23.3.13",
+    "@types/react": "^16.7.20",
     "@types/storybook__addon-info": "^3.4.2",
     "@types/storybook__addon-knobs": "^3.4.1",
     "@types/storybook__react": "^4.0.0",
@@ -53,11 +53,13 @@
     "ts-jest": "^23.10.5",
     "tsconfig-paths-jest": "0.0.1",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
-    "typescript": "^3.2.1",
+    "typescript": "^3.2.4",
     "webpack": "^4.27.0"
   },
   "dependencies": {
     "@types/classnames": "^2.2.6",
+    "@types/node": "^10.12.18",
+    "@types/react-dom": "^16.0.11",
     "classnames": "^2.2.6",
     "popmotion": "^8.5.4",
     "react": "16.7.0-alpha.0",

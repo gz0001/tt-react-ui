@@ -1,19 +1,19 @@
 export interface TailWindCSS {
-  container?: boolean
-  'clear-fix'?: boolean
-  'list-reset'?: boolean
-  italic?: boolean
-  roman?: boolean
-  uppercase?: boolean
-  lowercase?: boolean
-  capitalize?: boolean
-  'normal-case'?: boolean
-  underline?: boolean
-  'line-through'?: boolean
-  'no-underline'?: boolean
+  container?: boolean | string
+  'clearfix'?: boolean | string
+  'list-reset'?: boolean | string
+  italic?: boolean | string
+  roman?: boolean | string
+  uppercase?: boolean | string
+  lowercase?: boolean | string
+  capitalize?: boolean | string
+  'normal-case'?: boolean | string
+  underline?: boolean | string
+  'line-through'?: boolean | string
+  'no-underline'?: boolean | string
   antialiased?: string
   'subpixel-antialiased'?: string
-  truncate?: boolean
+  truncate?: boolean | string
   display?:
     | 'block'
     | 'inline-block'
@@ -26,10 +26,10 @@ export interface TailWindCSS {
     | 'inline-flex'
     | 'grid'
     | 'inline-grid'
-    | string[]
-  position?: 'static' | 'fixed' | 'absolute' | 'relative' | 'sticky' | string[]
-  visibility?: 'visible' | 'invisible' | string[]
-  float?: 'float-right' | 'float-left' | 'float-none' | string[]
+    | string
+  position?: 'static' | 'fixed' | 'absolute' | 'relative' | 'sticky' | string
+  visibility?: 'visible' | 'invisible' | string
+  float?: 'float-right' | 'float-left' | 'float-none' | string
   overflow?:
     | 'auto '
     | 'hidden '
@@ -43,20 +43,20 @@ export interface TailWindCSS {
     | 'y-visible '
     | 'x-scroll '
     | 'y-scroll '
-    | string[]
-  scrolling?: 'touch' | 'auto' | string[]
-  pin?: boolean | 't' | 'r' | 'b' | 'l' | 'y' | 'x' | 'none' | string[]
-  z?: string | string[]
-  text?: string | string[]
-  font?: string | string[]
-  tracking?: string | string[]
-  leading?: string | string[]
-  align?: 'start' | 'center' | 'end' | 'between' | 'around' | string[]
-  whitespace?: string | string[]
-  break?: string | string[]
-  bg?: string | string[]
-  border?: string | string[]
-  rounded?: string | string[]
+    | string
+  scrolling?: 'touch' | 'auto' | string
+  pin?: boolean | 't' | 'r' | 'b' | 'l' | 'y' | 'x' | 'none' | string
+  z?: string 
+  text?: string 
+  font?: string 
+  tracking?: string 
+  leading?: string 
+  align?: 'start' | 'center' | 'end' | 'between' | 'around' | string
+  whitespace?: string 
+  break?: string 
+  bg?: string 
+  border?: string 
+  rounded?: string 
   flex?:
     | 'row'
     | 'row-reserve'
@@ -73,48 +73,49 @@ export interface TailWindCSS {
     | 'shrink'
     | 'no-grow'
     | 'no-shrink'
-    | string[]
-  items?: 'stretch' | 'start' | 'center' | 'end' | 'baseline' | string[]
-  content?: 'start' | 'center' | 'end' | 'between' | 'around' | string[]
-  self?: 'stretch' | 'start' | 'center' | 'end' | 'auto' | string[]
-  justify?: 'start' | 'center' | 'end' | 'between' | 'around' | string[]
-  p?: string | string[]
-  px?: string | string[]
-  py?: string | string[]
-  pt?: string | string[]
-  pr?: string | string[]
-  pb?: string | string[]
-  pl?: string | string[]
-  m?: string | string[]
-  mx?: string | string[]
-  my?: string | string[]
-  mt?: string | string[]
-  mr?: string | string[]
-  mb?: string | string[]
-  ml?: string | string[]
-  nm?: string | string[]
-  nmx?: string | string[]
-  nmy?: string | string[]
-  nmt?: string | string[]
-  nmr?: string | string[]
-  nmb?: string | string[]
-  nml?: string | string[]
-  w?: string | string[]
-  'min-w'?: string | string[]
-  'max-w'?: string | string[]
-  h?: string | string[]
-  'min-h'?: string | string[]
-  'max-h'?: string | string[]
-  table?: string | string[]
-  cursor?: string | string[]
-  'pointer-events'?: string | string[]
-  resize?: string | string[]
-  select?: string | string[]
-  appearance?: string | string[]
-  shadow?: string | string[]
-  object?: string | string[]
-  opacity?: string | string[]
-  outline?: string | string[]
-  fill?: string | string[]
-  stroke?: string | string[]
+    | string
+  items?: 'stretch' | 'start' | 'center' | 'end' | 'baseline' | string
+  content?: 'start' | 'center' | 'end' | 'between' | 'around' | string
+  self?: 'stretch' | 'start' | 'center' | 'end' | 'auto' | string
+  justify?:string | 'start' | 'center' | 'end' | 'between' | 'around' 
+  basis?: string 
+  p?: string 
+  px?: string 
+  py?: string 
+  pt?: string 
+  pr?: string 
+  pb?: string 
+  pl?: string 
+  m?: string 
+  mx?: string 
+  my?: string 
+  mt?: string 
+  mr?: string 
+  mb?: string 
+  ml?: string 
+  nm?: string 
+  nmx?: string 
+  nmy?: string 
+  nmt?: string 
+  nmr?: string 
+  nmb?: string 
+  nml?: string 
+  w?: string 
+  'min-w'?: string 
+  'max-w'?: string 
+  h?: string 
+  'min-h'?: string 
+  'max-h'?: string 
+  table?: string 
+  cursor?: string 
+  'pointer-events'?: string 
+  resize?: string 
+  select?: string 
+  appearance?: string 
+  shadow?: string 
+  object?: string 
+  opacity?: string 
+  outline?: string 
+  fill?: string 
+  stroke?: string 
 }

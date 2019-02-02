@@ -131,7 +131,7 @@
       border-bottom: var(--selectbox-material-border-hover);
     }
     &.focus {
-      border-bottom-color: transparent;
+      border-bottom: none;
       &::before {
         transform: translate(-50%, 100%) scaleX(1);
       }

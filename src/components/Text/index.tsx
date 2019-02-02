@@ -9,16 +9,16 @@ import { TailWindCSS } from './../../types/TailWindProps'
 export interface TextProps extends TailWindCSS {
   bold?: boolean
   center?: boolean
-  children: any
   /**
-   * color of headline
+   * color of text
    */
+  children?: React.ReactNode
   color?: string
   className?: string
+  hover?: string
   paragraph?: boolean
   size?: string
   textProps?: React.HTMLProps<HTMLParagraphElement | HTMLSpanElement>
-  uppercase?: boolean
   /**
    * style object
    *
@@ -33,15 +33,30 @@ export const Text: React.FunctionComponent<TextProps> = React.memo(props => {
     children,
     color,
     className,
+    hover,
     paragraph,
-    uppercase,
     size,
     style,
+    text: tx,
     textProps,
     ...styleProps
   } = props
 
   const Tag = paragraph ? 'p' : 'span'
+
+  const textStyle = { text: tx ? tx : '' }
+
+  if (color !== undefined && color.length > 0) textStyle.text += ',' + color
+  if (size !== undefined && size.length > 0) textStyle.text += ',' + size
+  if (hover !== undefined && hover.length > 0)
+    textStyle.text +=
+      ',' +
+      hover
+        .split(',')
+        .map(val => 'hover:' + val.trim())
+        .reduce((prev, cur) => prev + ',' + cur)
+
+  if (textStyle.text.charAt(0) === ',') textStyle.text = textStyle.text.substr(1)
 
   return (
     // @ts-ignore
@@ -49,10 +64,8 @@ export const Text: React.FunctionComponent<TextProps> = React.memo(props => {
       className={cx(
         'Text',
         bold && 'font-bold',
-        color && `text-${color}`,
         center && 'text-center',
-        size && `text-${size}`,
-        uppercase && 'uppercase',
+        getClassNames(textStyle),
         getClassNames(styleProps),
         className && className
       )}

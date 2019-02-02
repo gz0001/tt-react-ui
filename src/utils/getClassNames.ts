@@ -3,8 +3,8 @@ import classnames from 'classnames'
 export const getClassNames = (reactProps: any, prefix = ':'): string => {
   const TailwindStaticClasses = [
     'container',
-    'clear-fix',
-    'listReset',
+    'clearfix',
+    'list-reset',
     'italic',
     'roman',
     'uppercase',
@@ -15,12 +15,13 @@ export const getClassNames = (reactProps: any, prefix = ':'): string => {
     'line-through',
     'no-underline',
     'antialiased',
-    'subpixelAntialiased',
+    'subpixel-antialiased',
     'truncate'
   ]
 
   const TailwindSpecialClasses = ['display', 'position', 'visibility']
   const TailwindClasses = [
+    'basis',
     'float',
     'overflow',
     'scrolling',
@@ -87,57 +88,40 @@ export const getClassNames = (reactProps: any, prefix = ':'): string => {
     const type = typeof reactProps[key]
 
     if (TailwindStaticClasses.includes(key)) {
-      if (type === 'boolean') {
+      if (type === 'boolean' && value === true) {
         return `${key}`
       }
       if (type === 'string') {
-        return `${value}${prefix}${key}`
-      }
-      if (type === 'object') {
-        return (
-          Array.isArray(value) &&
-          value.map(val => {
-            return `${val}${prefix}${key}`
-          })
-        )
+        return value.split(',').map((v: string) => `${v.trim()}${prefix}${key}`)
       }
     }
     if (TailwindSpecialClasses.includes(key)) {
       if (type === 'string') {
-        return value
-      }
-      if (type === 'object') {
-        return (
-          Array.isArray(value) &&
-          value.map(val => {
-            const str = val.split(prefix)
-            return str.length === 2 ? `${str[0]}${prefix}${str[1]}` : `${str}`
-          })
-        )
+        return value.split(',').map((v: string) => v.trim())
       }
     }
 
     if (TailwindClasses.includes(key)) {
       const editedKey = key.includes('nm') ? key.replace('n', '-') : key
-      if (type === 'boolean') {
+      if (type === 'boolean' && value === true) {
         return `${editedKey}`
       }
       if (type === 'string') {
-        return `${editedKey}-${value}`
-      }
-      if (type === 'object') {
-        return (
-          Array.isArray(value) &&
-          value.map(val => {
-            if (val === editedKey) {
-              return key
-            }
-            const str = val.split(prefix)
-            return str.length === 2
-              ? `${str[0]}${prefix}${editedKey}-${str[1]}`
-              : `${editedKey}-${str}`
-          })
-        )
+        const vals = value.split(',').map((v: string) => v.trim())
+
+        const classes = vals.map((vl: string) => {
+          const cls = vl.split(prefix)
+          switch (cls.length) {
+            case 3:
+              return `${cls[0]}:${cls[1]}:${editedKey}-${cls[2]}`
+            case 2:
+              return `${cls[0]}:${editedKey}-${cls[1]}`
+            default:
+              return `${editedKey}-${cls[0]}`
+          }
+        })
+
+        return classes
       }
     }
   })

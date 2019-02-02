@@ -5,17 +5,6 @@ import { text, select } from '@storybook/addon-knobs/react'
 ;(storiesOf('Components/Box', module) as any).addWithJSX(
   'A basic component can be used as div',
   () => {
-    const colors = {
-      first: 'first',
-      second: 'second',
-      third: 'third',
-      fourth: 'fourth',
-      error: 'error',
-      success: 'success',
-      grey: 'grey',
-      transparent: 'transparent'
-    }
-
     const type = {
       artikel: 'artikel',
       footer: 'footer',
@@ -28,7 +17,7 @@ import { text, select } from '@storybook/addon-knobs/react'
     return (
       <div style={{ padding: '20px 40px' }}>
         <Box
-          bg={[select('background', colors, 'first'), 'lg:second']}
+          bg={text('background', 'first')}
           border={text('border', '2, black')}
           rounded={text('border-radius', '')}
           className={text('className', '')}
@@ -37,6 +26,7 @@ import { text, select } from '@storybook/addon-knobs/react'
           p={text('padding', '2')}
           type={select('type', type, 'div')}
           w={text('width', '12')}
+          justify={text('hustify', 'center')}
         >
           {text('chidren', 'i am a box')}
         </Box>
@@ -49,7 +39,7 @@ import { text, select } from '@storybook/addon-knobs/react'
   `return  <div style={{ padding: '20px 40px' }}>
             <Box
               bg="first"
-              border={["2", "black"]}
+              border="2, black"
               className="BoxClass"
               h="24"
               mt="2"

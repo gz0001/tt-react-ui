@@ -35,25 +35,26 @@ const convertNum = (num: string): string => {
   }
 }
 
-const getWidth = (width: string): string[] => {
-  if (!width) return null
-  let cols = width.split(',')
+const getOffset = (offset: string): string => {
+  if (!offset) return null
+  let cols = offset.split(',')
   cols = cols.map(col => {
     let str = col.split(':')
     let num = str.length > 1 ? str[1] : str[0]
     num = convertNum(num)
-
     return str.length > 1 ? `${str[0].trim()}:${num}` : num
   })
 
-  return cols
+  return cols.reduce((prev: string, cur: string) => {
+    return prev + ',' + cur
+  })
 }
 
 // Props:
 
 export interface ColProps extends TailWindCSS {
   children?: any
-  cols?: string
+  width?: string
   className?: string
   offset?: string
   px?: string
@@ -61,14 +62,15 @@ export interface ColProps extends TailWindCSS {
 }
 
 export const Col: React.FunctionComponent<ColProps> = React.memo(props => {
-  const { children, className, cols, offset,px, style, ...styleProps } = props
+  const { children, className, width, offset, px, style, ...styleProps } = props
+  console.log('offset: ', getOffset(offset))
   return (
     <Box
-      className={cx('Col max-w-full', className && className)}
+      basis={width}
+      className={cx('Col', className && className)}
       style={style}
       px={px}
-      w={getWidth(cols)}
-      ml={getWidth(offset)}
+      ml={getOffset(offset)}
       {...styleProps}
     >
       {children}
@@ -77,6 +79,7 @@ export const Col: React.FunctionComponent<ColProps> = React.memo(props => {
 })
 
 Col.defaultProps = {
-  cols: '12',
-  px: "2"
+  width: 'default',
+  display: 'block',
+  px: '4'
 }
