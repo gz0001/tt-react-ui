@@ -16,7 +16,7 @@ export interface ButtonProps extends TailWindCSS {
   color?: string
   disabled?: boolean
   loading?: boolean
-  outLine?: boolean
+  hollow?: boolean
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void
   /** ripple effect on click */
   ripple?: boolean
@@ -34,7 +34,7 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
     disabled,
     loading,
     onClick,
-    outLine,
+    hollow,
     ripple,
     style,
     type,
@@ -50,7 +50,7 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
   let text = `text-${color}`
 
   switch (true) {
-    case outLine:
+    case hollow:
       background = cx(`bg-transparent `, !disabled && `hover:bg-${bg}`)
       text = cx(`text-${bg}`, !disabled && `hover:text-${color}`)
       border = `border-${bg}`
@@ -95,7 +95,7 @@ export const Button: React.FunctionComponent<ButtonProps> = React.memo(props => 
         className && className,
         'Button focus:outline-none transition',
         loading && 'spinner',
-        outLine && 'outline',
+        hollow && 'outline',
         disabled && 'cursor-not-allowed disabled',
         styleOptions,
         getClassNames(styleProps)

@@ -99,10 +99,8 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
 
   let value: string = null
 
-  // @ts-ignore
   if (multiple && selection) {
-    // @ts-ignore
-    const selected = options.filter(option => selection.includes(option.value))
+    const selected = options.filter(option => (selection as (string | number)[]).includes(option.value))
     value = selected.length === 0 ? null : selected.map(sel => sel.label).join(', ')
   } else {
     const selected = options.find(option => option.value === selection)
@@ -144,11 +142,10 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
   const handleSelect = (option: Option) => {
     if (multiple) {
       if (selection) {
-        // @ts-ignore
-        const selected = [...selection]
+        
+        const selected = [...selection as (string | number)[]]
         const index = selected.findIndex(sel => option.value === sel)
         index > -1 ? selected.splice(index, 1) : selected.push(option.value)
-        // @ts-ignore
         onSelect(selected)
       } else {
         onSelect([option.value])
@@ -227,7 +224,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
     return (
       <div
         className={cx(
-          `Selectbox native relative w-full  hover:cursor-pointer `,
+          `Selectbox native relative w-full hover:cursor-pointer `,
           material && 'material',
           open && 'focus',
           className && className
@@ -255,8 +252,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
           className={cx('Selectbox-select w-full focus:outline-none')}
           id={id}
           name={name}
-          // @ts-ignore
-          value={selection}
+          value={selection as string | number}
           onFocus={toogleOpen}
           onBlur={toogleOpen}
           onChange={(event: React.ChangeEvent<HTMLSelectElement>) => onSelect(event.target.value)}
@@ -331,8 +327,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
             {options.map((option: Option, index: number) => {
               let isActive: boolean = false
               if (multiple && selection) {
-                // @ts-ignore
-                isActive = selection.includes(option.value)
+                isActive = (selection as (string | number)[]).includes(option.value)
               } else {
                 isActive = selection === option.value
               }

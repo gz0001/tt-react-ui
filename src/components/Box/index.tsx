@@ -9,10 +9,11 @@ import { TailWindCSS } from './../../types/TailWindProps'
 
 // Props:
 export interface BoxProps extends TailWindCSS {
-  children?: any
+  children?: React.ReactNode
   className?: string
   /**Pass any normal div props here */
   divProps?: React.HTMLProps<HTMLDivElement>
+  gradient?: string
   image?: string
   style?: React.CSSProperties
   type?: 'artikel' | 'footer' | 'header' | 'nav' | 'div' | 'section'
@@ -20,11 +21,15 @@ export interface BoxProps extends TailWindCSS {
 }
 
 export const Box: React.FunctionComponent<BoxProps> = React.memo(props => {
-  const { children, className, divProps, image, style, type, video } = props
+  const { children, className, divProps, gradient, image, style, type, video, ...rest } = props
 
+  // Typ:
   const Tag: any = type
-  //background image
-  const backgroundImage = image ? `url(${image})` : 'none'
+
+  // Background image:
+  let backgroundImage = 'none'
+  if (image) backgroundImage = `url(${image})`
+  if (gradient) backgroundImage = gradient
 
   // ============================================
 
@@ -42,12 +47,11 @@ export const Box: React.FunctionComponent<BoxProps> = React.memo(props => {
     )
   return (
     <Tag
-      className={cx(className && className, getClassNames(props) )}
+      className={cx(className && className, getClassNames(rest))}
       style={{ ...style, backgroundImage }}
+      children={video ? [renderVideo(), children] : children}
       {...divProps}
-    >
-      {renderVideo()} {children}
-    </Tag>
+    />
   )
 })
 

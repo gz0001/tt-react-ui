@@ -18,14 +18,14 @@ import { Button } from './'
         bg={select('background', bg, 'first')}
         btnProps={{ onMouseUp: () => console.log('mouse up') }}
         color={text('color', 'white')}
-
         disabled={boolean('disabled', false)}
         loading={boolean('loading', false)}
         rounded={text('borderRadius', 'sm')}
         m={text('margin', '2')}
         p={text('padding', '4')}
-        onClick={(e) => console.log('button clicked', e)}
-        outLine={boolean('outline', false)}
+        onClick={e => console.log('button clicked', e)}
+        hollow={boolean('hollow', false)}
+        ripple={boolean('ripple', false)}
         w={text('width', '32')}
         h={text('height', '12')}
       >

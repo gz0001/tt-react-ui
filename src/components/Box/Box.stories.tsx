@@ -25,7 +25,7 @@ import { text, select } from '@storybook/addon-knobs/react'
           m={text('margin', '')}
           p={text('padding', '2')}
           type={select('type', type, 'div')}
-          w={text('width', '12')}
+          w={text('width', '16')}
           justify={text('hustify', 'center')}
         >
           {text('chidren', 'i am a box')}
