@@ -11,7 +11,7 @@ export interface CheckboxProps {
   className?: string
   disabled?: boolean
   id?: string
-  label: string
+  label: React.ReactNode
   name?: string
   onCheck: () => void
   small?: boolean
@@ -61,7 +61,7 @@ export const Checkbox: React.FunctionComponent<CheckboxProps> = React.memo(
           <div
             className={cx(
               'Checkbox-checkmark -rotate-45 transition',
-              checked ? 'opacity-100' : 'opacity-0'
+              checked ? 'opacity-100 ' : 'opacity-0'
             )}
           />
           <input
@@ -73,7 +73,7 @@ export const Checkbox: React.FunctionComponent<CheckboxProps> = React.memo(
           />
         </div>
         <label
-          className={cx(`Checkbox-label  hover:cursor-${disabled ? 'not-allowed' : 'pointer'}`)}
+          className={cx(`Checkbox-label hover:cursor-${disabled ? 'not-allowed' : 'pointer'}`)}
           onClick={clicked}
         >
           {label}

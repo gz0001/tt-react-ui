@@ -10,7 +10,7 @@ export interface RadioProps {
   checked?: boolean
   className?: string
   id?: string
-  label: string
+  label: React.ReactNode
   name?: string
   onCheck: () => void
   small?: boolean

@@ -17,7 +17,6 @@ import { text, select } from '@storybook/addon-knobs/react'
         <Triangle
           className={text('className', '')}
           color={text('color', 'green')}
-          direction={select('direction', directions, 'up')}
           size={text('size', '2rem')}
         />
       </div>

@@ -12,6 +12,7 @@ export interface DialogProps {
   children?: any
   className?: string
   color?: string
+  contentClassName?: string
   onClose: () => void
   opacity?: number
   open: boolean
@@ -58,7 +59,7 @@ const DialogWrapper = posed.div({
 })
 
 export const Dialog: React.FunctionComponent<DialogProps> = React.memo(
-  ({ children, className, color, onClose, opacity, open, style }) => {
+  ({ children, className, color, contentClassName, onClose, opacity, open, style }) => {
     // Hooks:
     const background = useRef(null)
     const content = useRef(null)
@@ -72,7 +73,8 @@ export const Dialog: React.FunctionComponent<DialogProps> = React.memo(
         {open && (
           <DialogContainer
             className={cx(
-              `Dialog fixed pin overflow-y-auto overflow-x-hidden w-full h-screen flex justify-center items-center`
+              `Dialog fixed pin overflow-y-auto overflow-x-hidden w-full h-screen flex justify-center items-center`,
+              className && className
             )}
             key="DialogContainer"
           >
@@ -88,11 +90,11 @@ export const Dialog: React.FunctionComponent<DialogProps> = React.memo(
             <DialogWrapper
               className={cx(
                 'Dialog-content fixed bg-white min-w-6 p-4 focus:outline-none overflow-y-auto',
-                className && className
+                contentClassName && contentClassName
               )}
-              onKeyDown={(e: KeyboardEvent) => e.keyCode === 27 && onClose()}
+              onKeyDown={(e: React.KeyboardEvent) => e.keyCode === 27 && onClose()}
               style={style}
-              tabIndex="0"
+              tabIndex={0}
               ref={content}
             >
               {children}

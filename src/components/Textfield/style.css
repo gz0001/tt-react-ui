@@ -18,6 +18,7 @@
   &-list {
     max-height: var(--textfield-list-height);
     background: var(--textfield-list-background);
+    transform: translateY(101%) !important;
   }
   &-list-item {
     height: var(--textfield-list-item-height);

@@ -35,7 +35,7 @@ export const ScrollTop: React.FunctionComponent<ScrollTopProps> = React.memo(
       return () => {
         window.removeEventListener('scroll', showButton)
       }
-    })
+    },[show])
 
     const scrolltopIcon = icon ? (
       icon

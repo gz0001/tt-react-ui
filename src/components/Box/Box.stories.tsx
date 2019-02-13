@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { storiesOf } from '@storybook/react'
 import { Box } from './'
-import { text, select } from '@storybook/addon-knobs/react'
+import { text } from '@storybook/addon-knobs/react'
 ;(storiesOf('Components/Box', module) as any).addWithJSX(
   'A basic component can be used as div',
   () => {
@@ -24,7 +24,6 @@ import { text, select } from '@storybook/addon-knobs/react'
           h={text('height', '')}
           m={text('margin', '')}
           p={text('padding', '2')}
-          type={select('type', type, 'div')}
           w={text('width', '16')}
           justify={text('hustify', 'center')}
         >

@@ -63,7 +63,6 @@ export interface ColProps extends TailWindCSS {
 
 export const Col: React.FunctionComponent<ColProps> = React.memo(props => {
   const { children, className, width, offset, px, style, ...styleProps } = props
-  console.log('offset: ', getOffset(offset))
   return (
     <Box
       basis={width}
@@ -81,5 +80,6 @@ export const Col: React.FunctionComponent<ColProps> = React.memo(props => {
 Col.defaultProps = {
   width: 'default',
   display: 'block',
-  px: '4'
+  px: '4',
+  w: null
 }

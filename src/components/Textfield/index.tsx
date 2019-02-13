@@ -7,80 +7,38 @@ import { createState } from '../../utils/createState'
 
 // ================================================================================================
 
-// Default timing:
-const animateInTime = 200
-const animateOutTime = 200
-
 // Default animations:
-const preEnterList = {
-  y: '100%',
-  opacity: 0
-}
 
-const enterList = {
-  y: '100%',
-  opacity: 1,
-  delayChildren: animateInTime / 2,
-  staggerChildren: 50,
-  transition: (props: any) => {
-    if (props.keys === 'opacity') {
-      return tween({
-        ...props,
-        duration: animateInTime,
-        ease: easing.linear
-      })
-    } else {
-      return tween({
-        ...props,
-        duration: animateInTime,
-        ease: easing.easeOut
-      })
-    }
+const AnimatedList = posed.div({
+  preEnter: {
+    opacity: 0
+  },
+  enter: {
+    beforeChildren: true,
+    opacity: 1,
+    staggerChildren: 50
+  },
+  exit: {
+    opacity: 0,
+    duration: 250
   }
-}
+})
 
-const exitList = {
-  y: '100%',
-  opacity: 0,
-  delay: 200,
-  staggerChildren: 50,
-  transition: (props: any) => {
-    if (props.keys === 'opacity') {
-      return tween({
-        ...props,
-        duration: animateOutTime,
-        ease: easing.linear
-      })
-    } else {
-      return tween({
-        ...props,
-        duration: animateOutTime,
-        ease: easing.easeOut
-      })
-    }
+const AnimatedListItem = posed.button({
+  preEnter: {
+    opacity: 0,
+    y: '-20%'
+  },
+  enter: {
+    opacity: 1,
+    y: 0
+  },
+  exit: {
+    opacity: 0
   }
-}
-
-const preEnterItem = {
-  opacity: 0,
-  y: '-20%'
-}
-
-const enterItem = {
-  opacity: 1,
-  y: 0
-}
-
-const exitItem = {
-  opacity: 0,
-  y: '20%'
-}
-
-const AnimatedList = posed.div({ preEnter: preEnterList, enter: enterList, exit: exitList })
-const AnimatedListItem = posed.button({ preEnter: preEnterItem, enter: enterItem, exit: exitItem })
+})
 
 // Props:
-
 export interface TextfieldProps {
   autocomplete?: string[]
   autocompleteFrom?: number
@@ -91,7 +49,7 @@ export interface TextfieldProps {
   iconStart?: React.ReactNode
   id?: string
   inputProps?: React.HTMLProps<HTMLInputElement>
-  label?: string
+  label?: React.ReactNode
   material?: boolean
   onEnter?: () => void
   onInput: (text: string) => void
@@ -99,6 +57,14 @@ export interface TextfieldProps {
   type?: string
   value: string
   style?: React.CSSProperties
+}
+
+// State:
+type State = {
+  populated: boolean
+  list: string[]
+  open: boolean
+  selIndex: number
 }
 
 export const Textfield: React.FunctionComponent<TextfieldProps> = React.memo(props => {
@@ -122,7 +88,7 @@ export const Textfield: React.FunctionComponent<TextfieldProps> = React.memo(pro
   } = props
 
   // Hooks:
-  const [state, setState] = createState({
+  const [state, setState] = createState<State>({
     populated: false,
     list: [],
     open: false,
@@ -172,13 +138,13 @@ export const Textfield: React.FunctionComponent<TextfieldProps> = React.memo(pro
           index =
             selIndex === -1 ? list.length - 1 : selIndex === 0 ? list.length - 1 : selIndex - 1
           setState({ selIndex: index })
-          handleListScroll(index)
+          handleListScroll(index, true)
           e.preventDefault()
           break
         case 'ArrowDown':
           index = selIndex === -1 ? 0 : selIndex === list.length - 1 ? 0 : selIndex + 1
           setState({ selIndex: index })
-          handleListScroll(index)
+          handleListScroll(index, false)
           e.preventDefault()
           break
         case 'Enter':
@@ -195,7 +161,7 @@ export const Textfield: React.FunctionComponent<TextfieldProps> = React.memo(pro
     }
   }
 
-  const handleListScroll = (index: number) => {
+  const handleListScroll = (index: number, up: boolean) => {
     if (listContainer.current && list.length > 0) {
       const { top: listTop, bottom: listBottom } = listContainer.current.getBoundingClientRect()
       const { top: rowTop, bottom: rowBottom } = listContainer.current.childNodes[
@@ -204,9 +170,7 @@ export const Textfield: React.FunctionComponent<TextfieldProps> = React.memo(pro
 
       // Check row inside list container view
       if (rowTop < listTop || rowBottom > listBottom) {
-        listContainer.current.scroll({
-          top: listContainer.current.childNodes[index].offsetTop
-        })
+        listContainer.current.childNodes[index].scrollIntoView(up)
       }
     }
   }
@@ -214,7 +178,7 @@ export const Textfield: React.FunctionComponent<TextfieldProps> = React.memo(pro
   return (
     <div
       className={cx(
-        `Textfield relative flex flex-col justify-center transition`,
+        `Textfield relative flex flex-col justify-center`,
         material && 'material',
         populated && 'focus',
         className && className
@@ -253,12 +217,12 @@ export const Textfield: React.FunctionComponent<TextfieldProps> = React.memo(pro
       </div>
 
       <PoseGroup preEnterPose="preEnter">
-        {open && autocomplete && (
-          <AnimatedList
-            className="Textfield-list absolute w-full overflow-y-scroll pin-b pin-l z-10"
-            key="list"
-            ref={listContainer}
-          >
+      {open && autocomplete && (
+        <AnimatedList
+          className="Textfield-list absolute w-full overflow-y-scroll pin-b pin-l z-10"
+          key="list"
+          ref={listContainer}
+        >
             {list.map((value: string, i: number) => {
               const ListItem = i < 6 ? AnimatedListItem : 'button'
               return (
@@ -274,8 +238,8 @@ export const Textfield: React.FunctionComponent<TextfieldProps> = React.memo(pro
                 </ListItem>
               )
             })}
-          </AnimatedList>
-        )}
+        </AnimatedList>
+      )}
       </PoseGroup>
     </div>
   )

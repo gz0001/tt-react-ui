@@ -7,7 +7,6 @@ import { createState } from '../../utils/createState'
 // ================================================================================================
 
 // Props:
-
 export interface Option {
   label: string
   value: string | number
@@ -23,19 +22,23 @@ export interface SelectboxProps {
   id?: string
   iconEnd?: React.ReactNode
   iconStart?: React.ReactNode
-  label?: string
+  label?: React.ReactNode
   material?: boolean
   multiple?: boolean
   multipleSave?: string
   name?: string
   /**set only true if multiple === false */
-
   native?: boolean
   onSelect: (selection: Selection) => void
   options: Option[]
   selection?: Selection
   style?: React.CSSProperties
   text?: string
+}
+// state:
+type State = {
+  open: boolean
+  selIndex: number
 }
 
 // ================================================================================================
@@ -100,7 +103,9 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
   let value: string = null
 
   if (multiple && selection) {
-    const selected = options.filter(option => (selection as (string | number)[]).includes(option.value))
+    const selected = options.filter(option =>
+      (selection as (string | number)[]).includes(option.value)
+    )
     value = selected.length === 0 ? null : selected.map(sel => sel.label).join(', ')
   } else {
     const selected = options.find(option => option.value === selection)
@@ -108,7 +113,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
   }
 
   // Hooks:
-  const [state, setState] = createState({
+  const [state, setState] = createState<State>({
     open: false,
     selIndex: -1
   })
@@ -123,7 +128,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
     return () => {
       document.removeEventListener('mousedown', handleClickOutSide)
     }
-  })
+  }, [open])
 
   // Handlers:
   const toogleOpen = () => {
@@ -142,8 +147,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
   const handleSelect = (option: Option) => {
     if (multiple) {
       if (selection) {
-        
-        const selected = [...selection as (string | number)[]]
+        const selected = [...(selection as (string | number)[])]
         const index = selected.findIndex(sel => option.value === sel)
         index > -1 ? selected.splice(index, 1) : selected.push(option.value)
         onSelect(selected)
@@ -157,7 +161,8 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    switch (e.keyCode) {
+    const code: number = e.keyCode ? e.keyCode : e.which
+    switch (code) {
       case keyCode.ESCAPE:
         setState({ open: false, selIndex: -1 })
         e.stopPropagation()
@@ -182,6 +187,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
 
   const handleChangeSelect = (key: number) => {
     let curIndex = 0
+    let up = true
     if (multiple) {
       if (selIndex > -1) {
         curIndex = selIndex
@@ -195,14 +201,15 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
 
     if (key === keyCode.DOWN) {
       curIndex < options.length - 1 ? curIndex++ : curIndex
+      up = false
     } else {
       curIndex > 0 ? curIndex-- : curIndex
     }
     multiple ? setState({ selIndex: curIndex }) : onSelect(options[curIndex].value)
-    handleListScroll(curIndex)
+    handleListScroll(curIndex, up)
   }
 
-  const handleListScroll = (index: number) => {
+  const handleListScroll = (index: number, up: boolean) => {
     if (listContainer.current) {
       const { top: listTop, bottom: listBottom } = listContainer.current.getBoundingClientRect()
       const { top: rowTop, bottom: rowBottom } = listContainer.current.childNodes[
@@ -211,9 +218,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
 
       // Check row inside list container view
       if (rowTop < listTop || rowBottom > listBottom) {
-        listContainer.current.scroll({
-          top: listContainer.current.childNodes[index].offsetTop
-        })
+        listContainer.current.childNodes[index].scrollIntoView(up)
       }
     }
   }
@@ -286,7 +291,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
         aria-haspopup="listbox"
         aria-expanded={open}
         className={cx(
-          `Selectbox-trigger relative flex content-between items-center w-full focus:outline-none`
+          `Selectbox-trigger relative flex content-between items-center w-full h-full focus:outline-none`
         )}
         onClick={toogleOpen}
       >
@@ -335,26 +340,22 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
               const ListItem = index < 6 ? AnimatedListItem : 'button'
 
               return (
-                <>
-                  <ListItem
-                    aria-selected={isActive}
-                    className={cx(
-                      `Selectbox-list-item flex items-center w-full focus:outline-none`,
-                      isActive && 'active',
-                      index === selIndex && 'selecting'
-                    )}
-                    key={option.label}
-                    onClick={() => handleSelect(option)}
-                    role="option"
-                  >
-                    {option.iconStart && option.iconStart}
-                    {multiple && (
-                      <div className={cx('Selectbox-list-item-checkbox relative mr-2')} />
-                    )}
-                    <span className={cx(`Selectbox-list-item-label`)}>{option.label}</span>
-                    {option.iconEnd && option.iconEnd}
-                  </ListItem>
-                </>
+                <ListItem
+                  aria-selected={isActive}
+                  className={cx(
+                    `Selectbox-list-item flex items-center w-full focus:outline-none`,
+                    isActive && 'active',
+                    index === selIndex && 'selecting'
+                  )}
+                  key={option.label}
+                  onClick={() => handleSelect(option)}
+                  role="option"
+                >
+                  {option.iconStart && option.iconStart}
+                  {multiple && <div className={cx('Selectbox-list-item-checkbox relative mr-2')} />}
+                  <span className={cx(`Selectbox-list-item-label`)}>{option.label}</span>
+                  {option.iconEnd && option.iconEnd}
+                </ListItem>
               )
             })}
           </AnimatedList>

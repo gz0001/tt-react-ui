@@ -7,7 +7,7 @@ const TextfieldDemo = () => {
   const [text, setText] = React.useState('React')
 
   return (
-    <div style={{padding: '20px 40px'}}>
+    <div style={{ padding: '20px 40px' }}>
       <p className="mb-2">Input: {text}</p>
       <Textfield
         autocomplete={[
@@ -16,13 +16,18 @@ const TextfieldDemo = () => {
           'React Web App',
           'React Posed',
           'React UI',
+          'React UI Lib',
           'React App',
-          'React Lib'
+          'React Lib',
+          'React Mobile',
+          'React Mobile Native',
+          'Node JS',
+          
         ]}
         onInput={text => setText(text)}
         onEnter={() => console.log(`submit: `, text)}
         label="Some text"
-        material={boolean("material", false)}
+        material={boolean('material', false)}
         placeholder="You can type anything here"
         value={text}
       />
@@ -32,7 +37,7 @@ const TextfieldDemo = () => {
 ;(storiesOf('Components/Textfield', module) as any).addWithJSX(
   'A basic component can be used as textfield',
   () => (
-    <div style={{padding: '20px 40px'}}>
+    <div style={{ padding: '20px 40px' }}>
       <Textfield
         className={text('className', '')}
         onInput={() => null}
