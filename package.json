@@ -1,6 +1,6 @@
 {
   "name": "tt-react-ui-2",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "React NPM library containing common components",
   "main": "build/index.js",
   "types": "build/index.d.ts",

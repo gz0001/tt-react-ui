@@ -80,6 +80,7 @@
     &Wrapper {
       transform: translateY(101%);
       height: var(--selectbox-list-height);
+      z-index: 9;
     }
   }
   &-select {

@@ -71,11 +71,11 @@ const AnimatedList = posed.div({
 const AnimatedListItem = posed.div({
   preEnter: {
     opacity: 0,
-    y: '-20%'
+    x: '20%'
   },
   enter: {
     opacity: 1,
-    y: 0
+    x: 0
   },
   exit: {
     opacity: 0
@@ -365,7 +365,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
       <PoseGroup preEnterPose="preEnter">
         {multiple && open && (
           <AnimatedList
-            className={cx('Selectbox-list-submitWrapper w-full absolute pin-b pin-l z-1')}
+            className={cx('Selectbox-list-submitWrapper w-full absolute pin-b pin-l')}
             key="selectbox-submit-wrapper"
           >
             <button
