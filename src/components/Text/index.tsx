@@ -46,9 +46,9 @@ export const Text: React.FunctionComponent<TextProps> = React.memo(props => {
 
   const textStyle = { text: tx ? tx : '' }
 
-  if (color !== undefined && color.length > 0) textStyle.text += ',' + color
-  if (size !== undefined && size.length > 0) textStyle.text += ',' + size
-  if (hover !== undefined && hover.length > 0)
+  if (color && color.length > 0) textStyle.text += ',' + color
+  if (size && size.length > 0) textStyle.text += ',' + size
+  if (hover && hover.length > 0)
     textStyle.text +=
       ',' +
       hover
@@ -77,6 +77,3 @@ export const Text: React.FunctionComponent<TextProps> = React.memo(props => {
   )
 })
 
-Text.defaultProps = {
-  color: 'text'
-}

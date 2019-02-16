@@ -16,7 +16,8 @@ export const getClassNames = (reactProps: any, prefix = ':'): string => {
     'no-underline',
     'antialiased',
     'subpixel-antialiased',
-    'truncate'
+    'truncate',
+    'transition'
   ]
 
   const TailwindSpecialClasses = ['display', 'position', 'visibility']

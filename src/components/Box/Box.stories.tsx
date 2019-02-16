@@ -17,15 +17,17 @@ import { text } from '@storybook/addon-knobs/react'
     return (
       <div style={{ padding: '20px 40px' }}>
         <Box
-          bg={text('background', 'first')}
+          bg={text('background', 'first, hover:second')}
           border={text('border', '2, black')}
-          rounded={text('border-radius', '')}
+          rounded={text('border-radius', 'sm')}
           className={text('className', '')}
-          h={text('height', '')}
+          h={text('height', '24')}
           m={text('margin', '')}
           p={text('padding', '2')}
-          w={text('width', '16')}
-          justify={text('hustify', 'center')}
+          w={text('width', '32')}
+          justify={text('justify', 'center')}
+          items={text('items', "center, lg:start")}
+          transition
         >
           {text('chidren', 'i am a box')}
         </Box>

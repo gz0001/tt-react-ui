@@ -7,12 +7,13 @@ import { TailWindCSS } from './../../types/TailWindProps'
 
 // Props:
 export interface HeadlineProps extends TailWindCSS {
+  bold?: boolean
   center?: boolean
   children: any
   /**
    * color of headline
    */
-  color?: 'grey' | 'first' | 'second' | 'third' | 'fourth' | 'error' | 'success' | 'text' | 'white'
+  color?: string
 
   className?: string
   headingProps?: React.HTMLProps<HTMLHeadingElement>
@@ -20,6 +21,7 @@ export interface HeadlineProps extends TailWindCSS {
    * headline size
    *
    */
+  hover?: string
   level?: '1' | '2' | '3' | '4' | '5' | '6'
   uppercase?: boolean
   /**
@@ -32,27 +34,44 @@ export interface HeadlineProps extends TailWindCSS {
 
 export const Headline: React.FunctionComponent<HeadlineProps> = React.memo(props => {
   const {
+    bold,
     center,
     children,
     color,
     className,
     headingProps,
+    hover,
     level,
     uppercase,
     style,
     size,
+    text: tx,
     ...styleProps
   } = props
   const Tag: any = `h${level}`
+
+  const textStyle = { text: tx ? tx : '' }
+
+  if (color && color.length > 0) textStyle.text += ',' + color
+  if (size && size.length > 0) textStyle.text += ',' + size
+  if (hover && hover.length > 0)
+    textStyle.text +=
+      ',' +
+      hover
+        .split(',')
+        .map(val => 'hover:' + val.trim())
+        .reduce((prev, cur) => prev + ',' + cur)
+
+  if (textStyle.text.charAt(0) === ',') textStyle.text = textStyle.text.substr(1)
 
   return (
     <Tag
       className={cx(
         'Headline',
-        color && `text-${color}`,
+        bold && 'font-bold',
         center && 'text-center',
         uppercase && 'uppercase',
-        size && getClassNames(size, 'text-'),
+        getClassNames(textStyle),
         getClassNames(styleProps),
         className && className
       )}

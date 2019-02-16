@@ -1,3 +1,6 @@
+
+export type MultipleStyle = string & {attr?: any}
+
 export interface TailWindCSS {
   container?: boolean | string
   'clearfix'?: boolean | string
@@ -11,9 +14,10 @@ export interface TailWindCSS {
   underline?: boolean | string
   'line-through'?: boolean | string
   'no-underline'?: boolean | string
-  antialiased?: string
-  'subpixel-antialiased'?: string
+  antialiased?: boolean | string
+  'subpixel-antialiased'?: boolean| string
   truncate?: boolean | string
+  transition?: boolean
   display?:
     | 'block'
     | 'inline-block'
@@ -26,10 +30,10 @@ export interface TailWindCSS {
     | 'inline-flex'
     | 'grid'
     | 'inline-grid'
-    | string
-  position?: 'static' | 'fixed' | 'absolute' | 'relative' | 'sticky' | string
-  visibility?: 'visible' | 'invisible' | string
-  float?: 'float-right' | 'float-left' | 'float-none' | string
+    | MultipleStyle
+  position?: 'static' | 'fixed' | 'absolute' | 'relative' | 'sticky' | MultipleStyle
+  visibility?: 'visible' | 'invisible' | MultipleStyle
+  float?: 'float-right' | 'float-left' | 'float-none' | MultipleStyle
   overflow?:
     | 'auto '
     | 'hidden '
@@ -43,17 +47,17 @@ export interface TailWindCSS {
     | 'y-visible '
     | 'x-scroll '
     | 'y-scroll '
-    | string
-  scrolling?: 'touch' | 'auto' | string
-  pin?: boolean | 't' | 'r' | 'b' | 'l' | 'y' | 'x' | 'none' | string
+    | MultipleStyle
+  scrolling?: 'touch' | 'auto' | MultipleStyle
+  pin?: boolean | 't' | 'r' | 'b' | 'l' | 'y' | 'x' | 'none' | MultipleStyle
   z?: string 
   text?: string 
   font?: string 
-  tracking?: string 
-  leading?: string 
-  align?: 'start' | 'center' | 'end' | 'between' | 'around' | string
-  whitespace?: string 
-  break?: string 
+  tracking?: 'tight' | 'normal' | 'wide'| MultipleStyle
+  leading?: 'none' | 'tight' | 'normal' | 'loose' | MultipleStyle 
+  align?: 'baseline' | 'top' | 'middle' | 'bottom' | 'text-top' | 'text-bottom' | MultipleStyle
+  whitespace?: 'normal' | 'no-wrap' | 'pre' | 'pre-line' | 'pre-wrap' | MultipleStyle 
+  break?: 'words' | 'normal' | MultipleStyle 
   bg?: string 
   border?: string 
   rounded?: string 
@@ -73,11 +77,11 @@ export interface TailWindCSS {
     | 'shrink'
     | 'no-grow'
     | 'no-shrink'
-    | string
-  items?: 'stretch' | 'start' | 'center' | 'end' | 'baseline' | string
-  content?: 'start' | 'center' | 'end' | 'between' | 'around' | string
-  self?: 'stretch' | 'start' | 'center' | 'end' | 'auto' | string
-  justify?:string | 'start' | 'center' | 'end' | 'between' | 'around' 
+    | MultipleStyle
+  items?: 'stretch' | 'start' | 'center' | 'end' | 'baseline' | MultipleStyle
+  content?: 'start' | 'center' | 'end' | 'between' | 'around' | MultipleStyle
+  self?: 'stretch' | 'start' | 'center' | 'end' | 'auto' | MultipleStyle
+  justify?: 'start' | 'center' | 'end' | 'between' | 'around' | MultipleStyle
   basis?: string 
   p?: string 
   px?: string 
@@ -106,16 +110,16 @@ export interface TailWindCSS {
   h?: string 
   'min-h'?: string 
   'max-h'?: string 
-  table?: string 
-  cursor?: string 
-  'pointer-events'?: string 
-  resize?: string 
-  select?: string 
-  appearance?: string 
+  table?: boolean | 'row' | 'cell' | MultipleStyle
+  cursor?: 'auto' | 'default' | 'pointer' | 'wait' | 'move' | 'not-allowed' | MultipleStyle 
+  'pointer-events'?: 'none' | 'auto' | MultipleStyle 
+  resize?: boolean | 'none' | 'x' | 'y' | MultipleStyle  
+  select?: 'none' | 'text' | MultipleStyle 
+  appearance?: 'none' | MultipleStyle 
   shadow?: string 
   object?: string 
   opacity?: string 
-  outline?: string 
+  outline?: 'none' | MultipleStyle 
   fill?: string 
   stroke?: string 
 }

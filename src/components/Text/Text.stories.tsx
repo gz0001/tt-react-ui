@@ -22,7 +22,7 @@ import { text, boolean, select } from '@storybook/addon-knobs/react'
         center={boolean('center', false)}
         className={text('className', '')}
         color={select('color', colors, 'text')}
-        paragraph={boolean('paragraph', false)}
+        paragraph={boolean('paragraph', true)}
         size={text('size', 'base')}
         hover={text('hover', 'red')}
         text={text('text', '')}
