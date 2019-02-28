@@ -62,11 +62,19 @@ export const Dialog: React.FunctionComponent<DialogProps> = React.memo(
   ({ children, className, color, contentClassName, onClose, opacity, open, style }) => {
     // Hooks:
     const background = useRef(null)
-    const content = useRef(null)
 
     useEffect(() => {
-      content.current && content.current.focus()
-    })
+      window.addEventListener('keydown', handleKeyDown)
+
+      return () => {
+        window.removeEventListener('keydown', handleKeyDown)
+      }
+    }, [])
+
+    // Handlers:
+    const handleKeyDown = (e: KeyboardEvent) => {
+      e.keyCode === 27 && onClose()
+    }
 
     return (
       <PoseGroup preEnterPose="preEnter">
@@ -92,10 +100,8 @@ export const Dialog: React.FunctionComponent<DialogProps> = React.memo(
                 'Dialog-content fixed bg-white min-w-6 p-4 focus:outline-none overflow-y-auto',
                 contentClassName && contentClassName
               )}
-              onKeyDown={(e: React.KeyboardEvent) => e.keyCode === 27 && onClose()}
               style={style}
               tabIndex={0}
-              ref={content}
             >
               {children}
             </DialogWrapper>

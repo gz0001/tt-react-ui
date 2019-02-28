@@ -17,6 +17,7 @@ export interface TextProps extends TailWindCSS {
   className?: string
   hover?: string
   paragraph?: boolean
+  ref?: React.Ref<HTMLParagraphElement | HTMLSpanElement>
   size?: string
   textProps?: React.HTMLProps<HTMLParagraphElement | HTMLSpanElement>
   /**
@@ -26,7 +27,7 @@ export interface TextProps extends TailWindCSS {
   style?: React.CSSProperties
 }
 
-export const Text: React.FunctionComponent<TextProps> = React.memo(props => {
+export const Text: React.FunctionComponent<TextProps> = React.memo(React.forwardRef((props, ref) => {
   const {
     bold,
     center,
@@ -71,9 +72,11 @@ export const Text: React.FunctionComponent<TextProps> = React.memo(props => {
       )}
       style={style}
       {...textProps}
+      // @ts-ignore
+      ref={ref}
     >
       {children}
     </Tag>
   )
-})
+}))
 

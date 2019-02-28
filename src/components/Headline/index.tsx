@@ -24,6 +24,7 @@ export interface HeadlineProps extends TailWindCSS {
   hover?: string
   level?: '1' | '2' | '3' | '4' | '5' | '6'
   uppercase?: boolean
+  ref?: React.Ref<HTMLHeadingElement>
   /**
    * style object
    *
@@ -32,7 +33,7 @@ export interface HeadlineProps extends TailWindCSS {
   size?: string
 }
 
-export const Headline: React.FunctionComponent<HeadlineProps> = React.memo(props => {
+export const Headline: React.FunctionComponent<HeadlineProps> = React.memo(React.forwardRef((props, ref) => {
   const {
     bold,
     center,
@@ -77,11 +78,12 @@ export const Headline: React.FunctionComponent<HeadlineProps> = React.memo(props
       )}
       style={style}
       {...headingProps}
+      ref={ref}
     >
       {children}
     </Tag>
   )
-})
+}))
 
 Headline.defaultProps = {
   level: '3'

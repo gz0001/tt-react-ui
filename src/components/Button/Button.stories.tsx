@@ -2,6 +2,24 @@ import * as React from 'react'
 import { storiesOf } from '@storybook/react'
 import { text, boolean, select } from '@storybook/addon-knobs/react'
 import { Button } from './'
+
+const BtnRef = () => {
+  const btRef = React.useRef<HTMLButtonElement>(null)
+
+  return (
+    <Button
+      w="24"
+      h="12"
+      p="1"
+      mt="4"
+      ripple={true}
+      ref={btRef}
+      onClick={() => console.log('this ref: ', btRef)}
+    >
+      Btn with ref
+    </Button>
+  )
+}
 ;(storiesOf('Components/Button', module) as any).addWithJSX('Basic button', () => {
   const bg = {
     first: 'first',
@@ -31,6 +49,8 @@ import { Button } from './'
       >
         {text('children', 'Im a button.')}
       </Button>
+
+      <BtnRef />
     </div>
   )
 })

@@ -26,7 +26,7 @@ import { text } from '@storybook/addon-knobs/react'
           p={text('padding', '2')}
           w={text('width', '32')}
           justify={text('justify', 'center')}
-          items={text('items', "center, lg:start")}
+          items={text('items', 'center, lg:start')}
           transition
         >
           {text('chidren', 'i am a box')}

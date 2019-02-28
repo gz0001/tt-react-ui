@@ -15,12 +15,13 @@ export interface BoxProps extends TailWindCSS {
   divProps?: React.HTMLProps<HTMLDivElement>
   gradient?: string
   image?: string
+  ref?: React.Ref<HTMLDivElement>
   style?: React.CSSProperties
   type?: 'artikel' | 'footer' | 'header' | 'nav' | 'div' | 'section'
   video?: string
 }
 
-export const Box: React.FunctionComponent<BoxProps> = React.memo(props => {
+export const Box: React.FunctionComponent<BoxProps> = React.memo( React.forwardRef((props, ref) => {
   const { children, className, divProps, gradient, image, style, type, video, ...rest } = props
 
   // Typ:
@@ -51,9 +52,10 @@ export const Box: React.FunctionComponent<BoxProps> = React.memo(props => {
       style={{ ...style, backgroundImage }}
       children={video ? [renderVideo(), children] : children}
       {...divProps}
+      ref={ref}
     />
   )
-})
+}))
 
 Box.defaultProps = {
   display: 'flex',
