@@ -27,8 +27,11 @@
     background-color: var(--selectbox-list-background);
     border: var(--selectbox-list-border);
     border-radius: var(--selectbox-list-border-radius);
-    max-height: var(--selectbox-list-height);
     transform: translateY(101%);
+    &Wrapper {
+      max-height: var(--selectbox-list-height);
+
+    }
   }
   &-list-item {
     height: var(--selectbox-list-item-height);
@@ -76,36 +79,32 @@
   &-list-submit {
     background-color: var(--selectbox-submit-background);
     height: var(--selectbox-list-item-height);
-    transform: translateY(100%);
-    &Wrapper {
-      transform: translateY(101%);
-      height: var(--selectbox-list-height);
-      z-index: 9;
-    }
   }
   &-select {
     appearance: none;
+    background-color: transparent;
     border: var(--selectbox-border);
     border-radius: var(--selectbox-border-radius);
-    background-color: var(--selectbox-background);
     padding: var(--selectbox-padding);
     padding-top: 1.25rem;
     color: var(--selectbox-color);
     .material & {
-      background-color: var(--selectbox-material-background);
       padding: var(--selectbox-native-material-padding);
     }
   }
   &.native {
+    background-color: var(--selectbox-background);
     .Selectbox-label {
       top: 50%;
       left: var(--selectbox-padding);
       transform: translate(0, -50%);
+      user-select: none;
       &.populated {
         transform: translateY(var(--selectbox-native-label-top));
       }
     }
     .Selectbox-arrow {
+      user-select: none;
       top: 40%;
       right: var(--selectbox-padding, 0.75rem);
       transform: rotate(45deg) translateX(-50%);
@@ -139,6 +138,7 @@
     }
   }
   &.native.material {
+    background-color: var(--selectbox-material-background);
     .Selectbox-label {
       left: 0;
     }

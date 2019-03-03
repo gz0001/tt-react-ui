@@ -9,7 +9,7 @@ const { useEffect, useRef } = React
 
 // Props:
 export interface DialogProps {
-  children?: any
+  children?: React.ReactNode
   className?: string
   color?: string
   contentClassName?: string

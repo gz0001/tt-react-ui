@@ -55,9 +55,9 @@ const AnimatedList = posed.div({
     opacity: 0
   },
   enter: {
-    delayChildren: 100,
+    beforeChildren: true,
     opacity: 1,
-    staggerChildren: 50
+    staggerChildren: 100
   },
   exit: {
     opacity: 0,
@@ -224,7 +224,6 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
   }
 
   // Render:
-
   if (native && !multiple) {
     return (
       <div
@@ -240,7 +239,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
           arrow
         ) : (
           <div
-            className={cx('Selectbox-arrow absolute w-3 h-3 border-black  border-b-2 border-r-2')}
+            className={cx('Selectbox-arrow absolute w-3 h-3 border-black border-b-2 border-r-2')}
           />
         )}
         <label
@@ -254,7 +253,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
         </label>
 
         <select
-          className={cx('Selectbox-select w-full focus:outline-none')}
+          className={cx('Selectbox-select w-full focus:outline-none hover:cursor-pointer relative')}
           id={id}
           name={name}
           value={selection as string | number}
@@ -324,59 +323,57 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
       <PoseGroup preEnterPose="preEnter">
         {open && (
           <AnimatedList
-            className={cx(`Selectbox-list w-full absolute pin-b pin-l overflow-y-auto z-10`)}
+            className={cx(`Selectbox-list w-full absolute pin-b pin-l  z-10`)}
             key="list"
-            ref={listContainer}
             role="listbox"
           >
-            {options.map((option: Option, index: number) => {
-              let isActive: boolean = false
-              if (multiple && selection) {
-                isActive = (selection as (string | number)[]).includes(option.value)
-              } else {
-                isActive = selection === option.value
-              }
-
-              const ListItem = index < 6 ? AnimatedListItem : 'button'
-
-              return (
-                <ListItem
-                  aria-selected={isActive}
-                  className={cx(
-                    `Selectbox-list-item flex items-center w-full focus:outline-none`,
-                    isActive && 'active',
-                    index === selIndex && 'selecting'
-                  )}
-                  key={option.label}
-                  onClick={() => handleSelect(option)}
-                  role="option"
-                >
-                  {option.iconStart && option.iconStart}
-                  {multiple && <div className={cx('Selectbox-list-item-checkbox relative mr-2')} />}
-                  <span className={cx(`Selectbox-list-item-label`)}>{option.label}</span>
-                  {option.iconEnd && option.iconEnd}
-                </ListItem>
-              )
-            })}
-          </AnimatedList>
-        )}
-      </PoseGroup>
-
-      <PoseGroup preEnterPose="preEnter">
-        {multiple && open && (
-          <AnimatedList
-            className={cx('Selectbox-list-submitWrapper w-full absolute pin-b pin-l')}
-            key="selectbox-submit-wrapper"
-          >
-            <button
-              className={cx(
-                `Selectbox-list-submit absolute pin-b pin-l flex items-center justify-center w-full px-4 focus:outline-none`
-              )}
-              key="selectbox-submit"
-              onClick={toogleOpen}
+            <div
+              className="Selectbox-listWrapper overflow-y-auto overflow-x-hidden"
+              ref={listContainer}
             >
-              {multipleSave}
-            </button>
+              {options.map((option: Option, index: number) => {
+                let isActive: boolean = false
+                if (multiple && selection) {
+                  isActive = (selection as (string | number)[]).includes(option.value)
+                } else {
+                  isActive = selection === option.value
+                }
+
+                const ListItem = index < 6 ? AnimatedListItem : 'button'
+
+                return (
+                  <ListItem
+                    aria-selected={isActive}
+                    className={cx(
+                      `Selectbox-list-item flex items-center w-full focus:outline-none`,
+                      isActive && 'active',
+                      index === selIndex && 'selecting'
+                    )}
+                    key={option.label}
+                    onClick={() => handleSelect(option)}
+                    role="option"
+                  >
+                    {option.iconStart && option.iconStart}
+                    {multiple && (
+                      <div className={cx('Selectbox-list-item-checkbox relative mr-2')} />
+                    )}
+                    <span className={cx(`Selectbox-list-item-label`)}>{option.label}</span>
+                    {option.iconEnd && option.iconEnd}
+                  </ListItem>
+                )
+              })}
+            </div>
+            {multiple && (
+              <button
+                className={cx(
+                  `Selectbox-list-submit flex items-center justify-center w-full px-4 focus:outline-none`
+                )}
+                key="selectbox-submit"
+                onClick={toogleOpen}
+              >
+                {multipleSave}
+              </button>
+            )}
           </AnimatedList>
         )}
       </PoseGroup>
