@@ -136,11 +136,8 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
   }
 
   const handleClickOutSide = (event: MouseEvent) => {
-    try {
-      // @ts-ignore
-      !(event.target.className.indexOf('Selectbox') > -1) && open && toogleOpen()
-    } catch (error) {
-      open && toogleOpen()
+    if (selectContainer.current) {
+      !selectContainer.current.contains(event.target) && open && setState({ open: false })
     }
   }
 
@@ -302,7 +299,7 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
         >
           {label}
         </label>
-        <div className={cx(`Selectbox-value relative w-full text-left truncate`)}>
+        <div className={cx(`Selectbox-value relative w-full text-left truncate pr-2`)}>
           <span className={cx(`Selectbox-content text-${text}`)}>{value ? value : '\xa0'}</span>
         </div>
         <div className="Selectbox-icon ml-auto transition">
@@ -370,6 +367,8 @@ export const Selectbox: React.FunctionComponent<SelectboxProps> = React.memo(pro
                 )}
                 key="selectbox-submit"
                 onClick={toogleOpen}
+                // @ts-ignore
+                style={{'--selectbox-submit-background': 'red'}}
               >
                 {multipleSave}
               </button>
