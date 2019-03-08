@@ -39,30 +39,3 @@ const DialogDemo = () => {
   )
 )
 ;(storiesOf('Components/Dialog/Demo', module) as any).addWithJSX('of Dialog', () => <DialogDemo />)
-;(storiesOf('Components/Dialog/LiveEdit', module) as any).addLiveSource(
-  'Dialog',
-  `
-  const Demo = () => {
-    const [open, setOpen] = React.useState(false)
-  
-    return (
-      <div style={{ padding: '20px 40px' }}>
-        <Button onClick={() => setOpen(true)} p="4">open Dialog</Button>
-        <Dialog
-          className={'flex justify-center items-center text-white'}
-          open={open}
-          onClose={() => setOpen(false)}
-        >
-          <Button onClick={() => setOpen(false)} bg="error" p="4">
-            close Dialog
-          </Button>
-        </Dialog>
-      </div>
-    )
-  }
-  return <Demo/>`,
-  {
-    Dialog,
-    Button
-  }
-)

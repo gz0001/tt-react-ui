@@ -37,12 +37,19 @@ const SelectboxDemo = () => {
 ;(storiesOf('Components/Selectbox', module) as any).addWithJSX(
   'A basic component can be used as selectbox',
   () => (
-    <div style={{padding: '20px 40px'}}>
+    <div style={{padding: '20px 40px', display: 'flex'}}>
       <Selectbox
         className={text('className', '')}
         onSelect={() => null}
         options={options}
         label="Select:"
+      />
+      <Selectbox
+        className="ml-5"
+        onSelect={() => null}
+        options={options}
+        label="Multiple Select:"
+        multiple={true}
       />
     </div>
   )

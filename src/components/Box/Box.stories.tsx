@@ -35,23 +35,4 @@ import { text } from '@storybook/addon-knobs/react'
     )
   }
 )
-;(storiesOf('Components/Box/LiveEdit', module) as any).addLiveSource(
-  'Demo',
-  `return  <div style={{ padding: '20px 40px' }}>
-            <Box
-              bg="first"
-              border="2, black"
-              className="BoxClass"
-              h="24"
-              mt="2"
-              p="2"
-              type="div"
-              w="32"
-            >
-              im a box
-            </Box>
-           </div>`,
-  {
-    Box
-  }
-)
+
