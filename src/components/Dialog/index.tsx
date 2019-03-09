@@ -1,5 +1,6 @@
 import * as React from 'react'
 import cx from 'classnames'
+import { Portal } from 'react-portal'
 import posed, { PoseGroup } from 'react-pose'
 import { easing, tween } from 'popmotion'
 
@@ -77,37 +78,39 @@ export const Dialog: React.FunctionComponent<DialogProps> = React.memo(
     }
 
     return (
-      <PoseGroup preEnterPose="preEnter">
-        {open && (
-          <DialogContainer
-            className={cx(
-              `Dialog fixed pin overflow-y-auto overflow-x-hidden w-full h-screen flex justify-center items-center`,
-              className && className
-            )}
-            key="DialogContainer"
-          >
-            <div
+      <Portal>
+        <PoseGroup preEnterPose="preEnter">
+          {open && (
+            <DialogContainer
               className={cx(
-                `Dialog-background pin bg-${color} overflow-y-auto overflow-x-hidden fixed w-full h-screen opacity-${opacity}`
+                `Dialog fixed pin overflow-y-auto overflow-x-hidden w-screen h-screen overflow-hidden flex justify-center items-center`,
+                className && className
               )}
-              onClick={(e: React.MouseEvent<HTMLElement>) =>
-                e.target === background.current && onClose()
-              }
-              ref={background}
-            />
-            <DialogWrapper
-              className={cx(
-                'Dialog-content fixed bg-white min-w-6 p-4 focus:outline-none overflow-y-auto',
-                contentClassName && contentClassName
-              )}
-              style={style}
-              tabIndex={0}
+              key="DialogContainer"
             >
-              {children}
-            </DialogWrapper>
-          </DialogContainer>
-        )}
-      </PoseGroup>
+              <div
+                className={cx(
+                  `Dialog-background pin bg-${color} overflow-y-hidden overflow-x-hidden fixed w-screen h-screen opacity-${opacity}`
+                )}
+                onClick={(e: React.MouseEvent<HTMLElement>) =>
+                  e.target === background.current && onClose()
+                }
+                ref={background}
+              />
+              <DialogWrapper
+                className={cx(
+                  'Dialog-content fixed bg-white min-w-6 p-4 focus:outline-none overflow-y-auto',
+                  contentClassName && contentClassName
+                )}
+                style={style}
+                tabIndex={0}
+              >
+                {children}
+              </DialogWrapper>
+            </DialogContainer>
+          )}
+        </PoseGroup>
+      </Portal>
     )
   }
 )
